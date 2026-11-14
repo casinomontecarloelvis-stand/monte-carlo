@@ -415,9 +415,14 @@ body{padding-left:max(30px,env(safe-area-inset-left,0px))!important;padding-righ
           <div class="etape"><span>3</span>Tu gagnes des points, des jetons et des cadeaux</div>
         </div>
         <label for="iPrenom">Prénom</label><input id="iPrenom" maxlength="30" autocomplete="given-name" placeholder="Ton prénom">
-        <label for="iNom">Nom <span style="text-transform:none;letter-spacing:0">(facultatif)</span></label><input id="iNom" maxlength="30" autocomplete="family-name" placeholder="Ton nom">
+        <label for="iNom">Nom</label><input id="iNom" maxlength="30" autocomplete="family-name" placeholder="Ton nom">
+        <label for="iTel">Téléphone</label><input id="iTel" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="06 12 34 56 78">
+        <label for="iMail">Mail <span style="text-transform:none;letter-spacing:0">(facultatif)</span></label><input id="iMail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" maxlength="120" placeholder="ton@mail.fr">
+        <label for="iVille">Ta ville</label><input id="iVille" autocomplete="address-level2" maxlength="60" placeholder="ex : Monaco">
         <label for="iPin">Code secret (4 chiffres)</label><input id="iPin" class="pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="••••">
         <p class="aide">Il te servira à retrouver ta carte sur un autre téléphone.</p>
+        <label class="coche" for="iPromo"><input type="checkbox" id="iPromo"><span class="cocheBox"></span><span>J'accepte de recevoir les promos et les dates de passage du Monte-Carlo par SMS et par mail.</span></label>
+        <p class="aide">Tes infos restent au stand Monte-Carlo, elles ne sont jamais données à personne.</p>
         <p class="erreurForm" id="eInscr"></p>
         <button type="submit" id="bInscr">Créer ma carte<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></button>
       </form>
@@ -2485,14 +2490,25 @@ $('tCx').onclick = () => onglet(true);
 
 $('fInscr').onsubmit = e => {
   e.preventDefault(); $('eInscr').textContent = '';
-  const pin = $('iPin').value.trim();
-  if (!/^[0-9]{4}$/.test(pin)) { $('eInscr').textContent = 'Choisis un code secret de 4 chiffres.'; return; }
+  const pin = $('iPin').value.trim(), err = m => { $('eInscr').textContent = m; };
+  const prenom = $('iPrenom').value.trim(), nom = $('iNom').value.trim(), tel = $('iTel').value.trim(), mail = $('iMail').value.trim(), ville = $('iVille').value.trim();
+  if (!prenom) return err('Indique ton prénom.');
+  if (!nom) return err('Indique ton nom.');
+  const chiffres = tel.replace(/[^0-9]/g, '');
+  if (chiffres.length < 9 || chiffres.length > 15) return err('Indique un numéro de téléphone valide.');
+  if (mail && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail)) return err('Ton adresse mail n\'est pas valide.');
+  if (!ville) return err('Indique ta ville.');
+  if (!/^[0-9]{4}$/.test(pin)) return err('Choisis un code secret de 4 chiffres.');
   occupe($('bInscr'), async () => {
     try {
-      session = await rpc('mc_inscription', { p_prenom: $('iPrenom').value, p_nom: $('iNom').value, p_pin: pin });
-      store('mc_session', session); store('mc_visites', 1); await charger(true); vue('carte');
+      session = await rpc('mc_inscription', { p_prenom: prenom, p_nom: nom, p_pin: pin });
+      store('mc_session', session); store('mc_visites', 1);
+      let infosOk = true;
+      try { await rpc('mc_mes_infos', { p_jeton: session.jeton, p_tel: tel, p_email: mail, p_ville: ville, p_promos: $('iPromo').checked }); } catch (e) { infosOk = false; }
+      await charger(true); vue('carte');
       toast(ICON('gift') + 'Bienvenue ! 15 points offerts');
-    } catch (err) { $('eInscr').textContent = err.message; }
+      if (!infosOk) { ouvrirInfos(false); $('nTel').value = tel; $('nMail').value = mail; $('nVille').value = ville; $('nPromo').checked = $('iPromo').checked; }
+    } catch (e) { err(e.message); }
   });
 };
 
