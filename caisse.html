@@ -498,6 +498,17 @@ body{padding-left:max(30px,env(safe-area-inset-left,0px))!important;padding-righ
       <textarea id="sInfos" rows="5" maxlength="1200"></textarea>
       <button type="button" class="orb" id="bStandSauve" style="width:100%;margin-top:10px"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Enregistrer</button>
     </div>
+    <div class="outil" id="oActus" hidden><i class="chip"><svg class="ic" aria-hidden="true"><use href="#i-spark"/></svg></i><b>Actualités du stand</b><svg class="ic chev" aria-hidden="true"><use href="#i-chev"/></svg></div>
+    <div class="bloc" id="pActus" hidden>
+      <p class="aide" style="margin:0 0 10px">Ce que tu écris ici s'affiche dans l'appli des clients, dans « Actualités du stand ».</p>
+      <form id="fActu" novalidate>
+        <div class="segA" id="aType"><button type="button" data-t="actu" class="on">Info</button><button type="button" data-t="nouveaute">Nouveauté</button><button type="button" data-t="jeu">Jeu</button><button type="button" data-t="cadeau">Cadeau</button></div>
+        <input id="aTitre" maxlength="80" placeholder="Titre (ex : Nocturne samedi soir !)">
+        <textarea id="aTexte" rows="3" maxlength="600" placeholder="Ton texte…"></textarea>
+        <button type="submit" class="orb" id="bActu" style="width:100%"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg>Publier dans l'appli</button>
+      </form>
+      <div class="liste" id="lActus" style="margin-top:12px"></div>
+    </div>
     <div class="outil" id="oFoires" hidden><i class="chip"><svg class="ic" aria-hidden="true"><use href="#i-flag"/></svg></i><b>Mes foires</b><svg class="ic chev" aria-hidden="true"><use href="#i-chev"/></svg></div>
     <div class="bloc" id="pFoires" hidden>
       <p class="aide" style="margin:0 0 10px">Indique la ville et les dates de chaque foire. Tous les clients inscrits pendant ces dates seront rangés dans cette foire.</p>
@@ -1494,6 +1505,73 @@ html body .membre .code{font:700 17px Georgia,serif!important;letter-spacing:.45
 html body .membre .info{font-size:12.5px!important;color:rgba(243,223,168,.75)!important;margin:6px 0 0!important;text-shadow:none!important;font-family:inherit}
 html body .membre{padding-bottom:20%!important}
 html body .membre .code{-webkit-text-fill-color:#f3dfa8!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;text-shadow:0 0 8px rgba(245,197,66,.35)!important}
+/* ===== Actualités du stand ===== */
+html body .actusB{position:relative;padding:10px 10px 12px!important;border:0!important;border-radius:14px;
+  background:radial-gradient(90% 60% at 50% 0%,rgba(245,197,66,.12),transparent 70%),linear-gradient(180deg,#1a020a,#0c0105)!important;
+  box-shadow:0 0 0 1px #c8901a,0 0 0 4px #14020a,0 0 0 5px rgba(200,144,26,.55),0 14px 28px rgba(0,0,0,.6)!important}
+.actusBan{display:block;width:100%;height:auto;border-radius:8px;box-shadow:0 0 0 1px rgba(245,197,66,.5)}
+#kActus{display:grid;gap:10px;margin-top:12px}
+.actu{position:relative;padding:12px 14px 13px 16px;border-radius:10px;background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.015));border:1px solid rgba(200,144,26,.35);overflow:hidden}
+.actu::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--or-g)}
+.actu.nouveaute::before{background:linear-gradient(#ff5a75,#b3122e)}
+.actu.jeu::before{background:linear-gradient(#5ee39a,#1fa35c)}
+.actuT{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.actuBadge{display:inline-flex;align-items:center;gap:5px;font:700 10.5px Georgia,serif;letter-spacing:.18em;text-transform:uppercase;color:#2a0610;background:var(--or-g);border-radius:999px;padding:3px 9px}
+.actu.nouveaute .actuBadge{background:linear-gradient(135deg,#ff8095,#d7263d);color:#fff}
+.actu.jeu .actuBadge{background:linear-gradient(135deg,#8ff0b8,#1fa35c);color:#0a2a16}
+.actuBadge .ic{width:12px;height:12px}
+.actuT small{color:rgba(243,223,168,.55);font-size:11.5px}
+.actu h5{margin:8px 0 3px;font:700 17px/1.25 Georgia,'Times New Roman',serif;color:#f3dfa8}
+.actu p{margin:0;font-size:14px;line-height:1.45;color:rgba(255,244,224,.82)}
+/* caisse */
+.segA{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px}
+html body .segA button{margin:0;min-height:0;padding:9px 4px;font-size:14px;background:rgba(255,255,255,.1);color:#fff;border-radius:10px;box-shadow:none}
+html body .segA button.on{background:var(--or-g);color:#2a0610}
+#pActus input,#pActus textarea{width:100%;box-sizing:border-box;font:inherit;font-size:16px;color:#fff;background:rgba(0,0,0,.42);border:1px solid rgba(245,197,66,.45);border-radius:12px;padding:12px;margin-bottom:8px}
+#pActus .ligne{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+html body .actuBadge svg{width:13px!important;height:13px!important;margin:0!important;padding:0!important;background:none!important;box-shadow:none!important;color:currentColor!important}
+/* Actualités : thème casino Monte-Carlo (velours rouge, or, tapis vert) */
+html body .actusB{background:radial-gradient(90% 60% at 50% 0%,rgba(255,120,120,.18),transparent 70%),
+    repeating-linear-gradient(90deg,rgba(0,0,0,.18) 0 2px,transparent 2px 9px),linear-gradient(180deg,#8f1022,#4a0612)!important;
+  box-shadow:0 0 0 2px #c8901a,0 0 0 4px #4a0612,0 0 0 5px rgba(245,197,66,.7),0 0 22px rgba(245,197,66,.3),0 14px 28px rgba(0,0,0,.55)!important}
+html body .actu{background:radial-gradient(120% 90% at 0% 0%,rgba(255,255,255,.07),transparent 60%),linear-gradient(160deg,#0f4d2c,#06301b)!important;
+  border:1.5px solid #c8901a!important;box-shadow:inset 0 0 0 3px rgba(0,0,0,.25),0 6px 14px rgba(0,0,0,.4)}
+html body .actu::before{display:none}
+html body .actu::after{content:"";position:absolute;right:-18px;top:-18px;width:62px;height:62px;border-radius:50%;opacity:.22;
+  background:radial-gradient(circle,transparent 0 13px,#fff 13px 15px,transparent 15px),repeating-conic-gradient(#d7263d 0 22.5deg,#fff 22.5deg 45deg)}
+html body .actu.nouveaute::after{background:radial-gradient(circle,transparent 0 13px,#fff 13px 15px,transparent 15px),repeating-conic-gradient(#16161a 0 22.5deg,#f5c542 22.5deg 45deg)}
+html body .actu.jeu::after{background:radial-gradient(circle,transparent 0 13px,#fff 13px 15px,transparent 15px),repeating-conic-gradient(#1f4fd6 0 22.5deg,#fff 22.5deg 45deg)}
+html body .actu h5{color:#ffe58a}
+html body .actu p{color:rgba(255,248,230,.88)}
+html body .actuT small{color:rgba(255,240,200,.6)}
+html body .actu .actuBadge{background:var(--or-g);color:#2a0610}
+html body .actu.nouveaute .actuBadge{background:linear-gradient(135deg,#ff6b82,#c8102e);color:#fff}
+html body .actu.jeu .actuBadge{background:linear-gradient(135deg,#2a2a30,#0b0b0e);color:#f5c542;box-shadow:inset 0 0 0 1px #c8901a}
+html body .actusBan{box-shadow:0 0 0 1.5px #c8901a,0 6px 14px rgba(0,0,0,.45)}
+html body .actu::after{top:auto;bottom:-20px;right:-20px}
+/* actualités repliées : on touche pour ouvrir */
+html body .actusTete{display:block;width:100%;margin:0;padding:0;border:0;background:none;box-shadow:none;text-align:left;min-height:0;cursor:pointer;color:inherit}
+.actusClic{display:flex;align-items:center;gap:10px;margin-top:10px;padding:11px 12px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(245,197,66,.22),rgba(0,0,0,.25));border:1.5px solid #c8901a;box-shadow:0 0 14px rgba(245,197,66,.25);animation:acBrille 2.4s ease-in-out infinite}
+.acDoigt{font-size:24px;animation:acTape 1.2s ease-in-out infinite}
+.acTxt{flex:1;min-width:0;color:#fff4e0;font-size:15px;line-height:1.25}
+.acTxt b{color:#ffe58a}
+.acTxt small{display:block;color:rgba(255,240,200,.75);font-size:12px;letter-spacing:.04em;margin-top:2px}
+.actusClic .badge{position:static}
+.acChev{color:#ffe58a;font-size:22px;line-height:1;transition:transform .3s}
+.actusB.ouvert .acChev{transform:rotate(180deg)}
+.actusB.ouvert .actusClic{animation:none}
+.actusB.ouvert .acDoigt{display:none}
+@keyframes acTape{50%{transform:translateY(-4px) scale(.92)}}
+@keyframes acBrille{50%{box-shadow:0 0 22px rgba(245,197,66,.55)}}
+#kActus[hidden]{display:none}
+html body .actu.cadeau .actuBadge{background:linear-gradient(135deg,#ff9ad0,#c8106e);color:#fff}
+html body .actu.cadeau::after{background:radial-gradient(circle,transparent 0 13px,#fff 13px 15px,transparent 15px),repeating-conic-gradient(#c8106e 0 22.5deg,#fff 22.5deg 45deg)}
+.segA{grid-template-columns:repeat(4,1fr)!important}
+html body .carte .bloc>button.actusTete,html body button.actusTete{display:block!important;width:100%!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;min-height:0!important;height:auto!important;text-align:left!important;font:inherit!important;color:inherit!important;border-radius:0!important;transform:none!important}
+html body button.actusTete .actusClic{display:flex!important}
+html body .actusCadre{display:block;margin:0}
+html body .actusCadre .actusBan{border-radius:9px}
 </style><script>/* QR Code — Copyright (c) 2009 Kazuhiko Arase, licence MIT (via qrcode-terminal) */
 var MCQR=(function(){var M={},C={};function require(n){n=n.replace(/^\.\//,"").replace(/\.js$/,"");if(C[n])return C[n].exports;var m=C[n]={exports:{}};M[n](m,m.exports,require);return m.exports}
 M['QR8bitByte']=function(module,exports,require){
@@ -2953,7 +3031,7 @@ async function ouvrir(pin) {
 }
 function entrer(r) {
   $('cQui').textContent = (emp.patron ? 'Patron · ' : 'Employé · ') + emp.nom;
-  $('oEmp').hidden = $('oFoires').hidden = $('oContacts').hidden = $('oMsgs').hidden = $('oRoue').hidden = $('oStand').hidden = !emp.patron;
+  $('oEmp').hidden = $('oFoires').hidden = $('oContacts').hidden = $('oMsgs').hidden = $('oRoue').hidden = $('oStand').hidden = $('oActus').hidden = !emp.patron;
   if (emp.patron) { majConv(); clearInterval(window._conv); window._conv = setInterval(() => { if (!document.hidden && emp && emp.patron) majConv(); }, 20000); }
   if (r) $('tEnJeu').textContent = r.clients + ' client(s) inscrit(s)';
   vue('caisse');
@@ -3142,6 +3220,29 @@ function sauverRoue(btn, msg) {
 }
 $('bRoueSauve').onclick = () => sauverRoue($('bRoueSauve'), 'Roue enregistrée');
 $('bStandSauve').onclick = () => sauverRoue($('bStandSauve'), 'Infos du stand enregistrées');
+
+/* ---------- Actualités du stand (patron) ---------- */
+let aType = 'actu';
+const TA = { actu: 'Info', nouveaute: 'Nouveauté', jeu: 'Jeu', cadeau: 'Cadeau' };
+function dessinerActus(l) {
+  $('lActus').innerHTML = l.length ? l.map(a => '<div class="ligne"><span><b>' + esc(a.titre) + '</b><br><small>' + TA[a.type] + ' · ' + quand(a.quand) + '</small></span><button type="button" class="gris" data-actu="' + a.id + '">Retirer</button></div>').join('') : '<p class="vide">Aucune actualité.</p>';
+}
+$('oActus').onclick = async () => { $('pActus').hidden = !$('pActus').hidden; if (!$('pActus').hidden) try { dessinerActus(await rpc('mc_actus')); } catch (e) { erreur(e); } };
+$('aType').onclick = e => { const b = e.target.closest('[data-t]'); if (!b) return; aType = b.dataset.t; [...$('aType').children].forEach(x => x.classList.toggle('on', x === b)); };
+$('fActu').onsubmit = e => {
+  e.preventDefault();
+  occupe($('bActu'), async () => {
+    try { dessinerActus(await rpc('mc_actu_ajouter', { p_pin: emp.pin, p_type: aType, p_titre: $('aTitre').value, p_texte: $('aTexte').value })); $('aTitre').value = ''; $('aTexte').value = ''; toast(ICON('check') + 'Actualité publiée'); }
+    catch (err) { siCodeFaux(err) || erreur(err); }
+  });
+};
+$('lActus').onclick = e => {
+  const b = e.target.closest('[data-actu]'); if (!b) return;
+  occupe(b, async () => {
+    if (!await demander('Retirer cette actualité ?', 'Elle ne s\'affichera plus dans l\'appli.', 'Retirer')) return;
+    try { dessinerActus(await rpc('mc_actu_retirer', { p_pin: emp.pin, p_id: +b.dataset.actu })); } catch (err) { siCodeFaux(err) || erreur(err); }
+  });
+};
 
 /* ---------- Foires (patron) ---------- */
 let foires = [];
