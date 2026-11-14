@@ -1,4 +1,4 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Monte-Carlo · Ma carte</title><meta name="description" content="Ma carte fidélité du stand Monte-Carlo"><meta name="theme-color" content="#3a0612"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Monte-Carlo"><link rel="apple-touch-icon" href="icone.png"><link rel="icon" href="icone.png"><link rel="manifest" href="manifest.json"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body><style>
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Monte-Carlo · Ma carte</title><meta name="description" content="Ma carte fidélité du stand Monte-Carlo"><meta name="theme-color" content="#3a0612"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Monte-Carlo"><link rel="apple-touch-icon" href="icone.png"><link rel="icon" href="icone.png"><script>if(/android/i.test(navigator.userAgent||'')){var l=document.createElement('link');l.rel='manifest';l.href='manifest.json';document.head.appendChild(l)}</script><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body><style>
 /* Démo d'appli fidélité pour un stand forain « jeu de pièces » : tapis vert, or et rouge, jetons.
    Navigation par onglets en haut (Accueil, Carte client, Tombola, Caisse, Écran du stand). Données d'exemple seulement. */
 :root{--orn1:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%23c8901a' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M4 56V22C4 12 12 4 22 4h34'/%3E%3Cpath d='M10 56V26c0-9 7-16 16-16h30' stroke-width='1.2'/%3E%3Cpath d='M4 30c8 0 14-6 14-14M30 4c0 8-6 14-14 14'/%3E%3Ccircle cx='16' cy='16' r='3.2' fill='%23f5c542'/%3E%3Cpath d='M22 22c6 2 9 7 8 13M22 22c2 6 7 9 13 8' stroke-width='1.4'/%3E%3C/g%3E%3C/svg%3E");--orn2:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60' transform='scale(-1 1)'%3E%3Cg fill='none' stroke='%23c8901a' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M4 56V22C4 12 12 4 22 4h34'/%3E%3Cpath d='M10 56V26c0-9 7-16 16-16h30' stroke-width='1.2'/%3E%3Cpath d='M4 30c8 0 14-6 14-14M30 4c0 8-6 14-14 14'/%3E%3Ccircle cx='16' cy='16' r='3.2' fill='%23f5c542'/%3E%3Cpath d='M22 22c6 2 9 7 8 13M22 22c2 6 7 9 13 8' stroke-width='1.4'/%3E%3C/g%3E%3C/svg%3E");--orn3:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60' transform='scale(1 -1)'%3E%3Cg fill='none' stroke='%23c8901a' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M4 56V22C4 12 12 4 22 4h34'/%3E%3Cpath d='M10 56V26c0-9 7-16 16-16h30' stroke-width='1.2'/%3E%3Cpath d='M4 30c8 0 14-6 14-14M30 4c0 8-6 14-14 14'/%3E%3Ccircle cx='16' cy='16' r='3.2' fill='%23f5c542'/%3E%3Cpath d='M22 22c6 2 9 7 8 13M22 22c2 6 7 9 13 8' stroke-width='1.4'/%3E%3C/g%3E%3C/svg%3E");--orn4:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60' transform='scale(-1 -1)'%3E%3Cg fill='none' stroke='%23c8901a' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M4 56V22C4 12 12 4 22 4h34'/%3E%3Cpath d='M10 56V26c0-9 7-16 16-16h30' stroke-width='1.2'/%3E%3Cpath d='M4 30c8 0 14-6 14-14M30 4c0 8-6 14-14 14'/%3E%3Ccircle cx='16' cy='16' r='3.2' fill='%23f5c542'/%3E%3Cpath d='M22 22c6 2 9 7 8 13M22 22c2 6 7 9 13 8' stroke-width='1.4'/%3E%3C/g%3E%3C/svg%3E");
@@ -402,6 +402,7 @@ body{padding-left:max(30px,env(safe-area-inset-left,0px))!important;padding-righ
   <!-- ===== ACCUEIL : inscription / connexion ===== -->
   <section class="vue" id="v-accueil" hidden>
     <div class="carte">
+      <div class="perdu" id="perduIcone" hidden><b>Tu avais déjà une carte ?</b> Touche « J'ai une carte » juste en dessous et entre ton code de carte et ton code secret : tu retrouves tous tes points.</div>
       <div class="seg"><button type="button" class="on" id="tInscr"><svg class="ic" aria-hidden="true"><use href="#i-spark"/></svg>Je m'inscris</button><button type="button" id="tCx"><svg class="ic" aria-hidden="true"><use href="#i-key"/></svg>J'ai une carte</button></div>
 
       <form id="fInscr" autocomplete="off" novalidate>
@@ -511,12 +512,35 @@ body{padding-left:max(30px,env(safe-area-inset-left,0px))!important;padding-righ
       <div class="bloc mesInfos led" id="kInfosB"><h4><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg>Mes infos</h4><div id="kInfos"></div><button type="button" class="orb" id="bInfosModif">Modifier mes infos</button></div>
       <div class="bloc foiresB led" id="kFoiresB" hidden><h4><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg>Suivez-nous sur nos foires</h4><div id="kFoires"></div></div>
       <div class="bloc garantie"><h4><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg>Garantie Monte-Carlo</h4><ul><li>Tes points t'appartiennent, d'une foire à l'autre.</li><li>Ils ne sont retirés que quand TU choisis un cadeau.</li><li>Tout est écrit dans ton historique.</li></ul></div>
-      <div class="bloc"><div class="astuce"><svg class="ic" aria-hidden="true"><use href="#i-spark"/></svg><span>Pour retrouver ta carte en un clic : dans Safari, touche <b>Partager</b> puis <b>Sur l'écran d'accueil</b>.</span></div></div>
+      <div class="sauve" id="sauve">
+        <div class="svTete"><span class="svBadge" aria-hidden="true"><svg viewBox="0 0 64 64"><defs><linearGradient id="svG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff3b0"/><stop offset="1" stop-color="#c8901a"/></linearGradient></defs><rect x="15" y="4" width="34" height="56" rx="8" fill="#2a0610" stroke="url(#svG)" stroke-width="3.5"/><rect x="26" y="8.5" width="12" height="3.5" rx="1.75" fill="#f5c542" opacity=".8"/><rect x="19" y="15" width="26" height="36" rx="3" fill="#5a0a1c"/><path d="M32 20v14M27.5 24.5 32 20l4.5 4.5" fill="none" stroke="#f5c542" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M28.5 29h-3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2V31a2 2 0 0 0-2-2h-3" fill="none" stroke="#f5c542" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="27" y="54.5" width="10" height="2" rx="1" fill="#d7263d"/></svg></span><div><span class="svSur">Sauvegarde</span><h4>Garde ton appli<br>sur ton smartphone</h4></div></div>
+        <p class="sv-intro">Ajoute Monte-Carlo sur ton écran d'accueil : tu l'ouvres en 1 seconde, comme une vraie appli, sans rien télécharger. Et tu reçois nos messages en notification.</p>
+        <button id="btnInstaller" type="button" class="svBtn" hidden>⬇️ Installer l'appli Monte-Carlo (1 clic)</button>
+        <div class="svBtns"><button id="btnDirect" type="button" class="svBtn svDirect">👆 Guide-moi en direct</button><button id="btnGuide" type="button" class="svBtn svExpl">📖 Voir l'explication</button></div>
+        <p class="sv-plus">📸 <b>En plus :</b> fais une capture d'écran de ton QR code. Et note ton code carte <b id="svCode"></b> avec ton code secret : avec les deux, tu retrouves toujours tes points.</p>
+      </div>
+      <div class="sv-ok" id="svOk" hidden>✅ Appli bien installée sur ton téléphone !</div>
 
       <div class="petits"><button type="button" class="lienb" id="bMaj"><svg class="ic" aria-hidden="true"><use href="#i-refresh"/></svg>Actualiser</button><button type="button" class="lienb" id="bSortir"><svg class="ic" aria-hidden="true"><use href="#i-logout"/></svg>Se déconnecter</button></div>
       <span class="maj" id="kMaj"></span>
     </div>
   </section>
+</div>
+
+<div class="gOv" id="gOv" hidden><div class="gBox">
+  <button class="gX" id="gX" type="button" aria-label="Fermer">✕</button>
+  <div class="gBravo" id="gBravo" hidden>🎉 Bravo, ta carte est créée !</div>
+  <h3 class="gTitre">Mets Monte-Carlo sur ton écran d'accueil</h3>
+  <div class="os"><button id="gBios" type="button" class="on">🍎 iPhone<small>Safari</small></button><button id="gBchr" type="button">🍎 iPhone<small>Chrome</small></button><button id="gBand" type="button">🤖 Android<small>Chrome, Samsung</small></button></div>
+  <div class="gSimple" id="gSimple"></div>
+  <button class="gEssai" id="gEssai" type="button">👍 J'essaie maintenant</button>
+</div></div>
+<div class="gDirect" id="gDirect" hidden>
+  <div class="gdBandeau"><button type="button" class="gdX" id="gdX" aria-label="Fermer le guide">✕</button>
+    <div class="gdTitre">Suis les étapes 👇</div>
+    <ol class="gdEtapes" id="gdEtapes"></ol>
+  </div>
+  <div class="gdMain" id="gdMain"><span class="gdRond"></span><span class="gdDoigt">👆</span><span class="gdTxt">Touche ici</span></div>
 </div>
 <style id="fondCanva">
 /* Fond chapiteau généré avec Canva */
@@ -1230,6 +1254,120 @@ html body .notifAide.etapesNotif{display:block;padding:12px 14px;border-radius:1
 .champImg .ledsC{z-index:2}
 html body .tomboB{padding:0!important;background:none!important;border:0!important;box-shadow:none!important}
 html body .tomboB .champTete{margin:0}
+
+/* ===== Garde ton appli sur ton smartphone (guide, comme IBIZOU) ===== */
+.perdu{background:#fff4d6;border:3px solid #f5c542;border-radius:14px;padding:10px 12px;margin:0 0 12px;font-size:14px;line-height:1.4;color:#3a0612;text-align:left}
+.sauve{position:relative;overflow:hidden;margin:14px 0;border-radius:20px;padding:16px;text-align:left;color:#fff4e0;
+  background:radial-gradient(circle at 15% 0%,rgba(245,197,66,.22),transparent 45%),radial-gradient(circle at 100% 100%,rgba(215,38,61,.35),transparent 50%),linear-gradient(160deg,#2a0610,#14020a);
+  border:2px solid rgba(245,197,66,.75);box-shadow:0 0 0 1px rgba(215,38,61,.6),0 0 22px rgba(245,197,66,.3),inset 0 0 30px rgba(245,197,66,.06)}
+.sauve[hidden]{display:none}
+.sauve::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(245,197,66,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(245,197,66,.06) 1px,transparent 1px);background-size:18px 18px;pointer-events:none}
+.sauve>*{position:relative}
+.svTete{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.svBadge{flex:none;width:58px;height:58px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,rgba(245,197,66,.2),rgba(215,38,61,.25));border:1.5px solid rgba(245,197,66,.7);box-shadow:0 0 14px rgba(245,197,66,.45);animation:svPulse 2.6s ease-in-out infinite}
+.svBadge svg{width:46px;height:46px}
+.svSur{display:block;font-weight:800;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#f5c542}
+html body .sauve h4{display:block;color:#fff;font:900 21px/1.12 Georgia,'Times New Roman',serif;margin:2px 0 0;text-shadow:0 0 8px rgba(245,197,66,.6)}
+.sv-intro{font-size:14px;line-height:1.45;color:#ffe9c9;margin:0 0 12px}
+.svBtns{display:grid;gap:8px}
+html body .sauve .svBtn{width:100%;margin:0;border:0;border-radius:14px;color:#2a0610;background:var(--or-g);box-shadow:0 0 16px rgba(245,197,66,.45),0 4px 0 #6a4300;font-size:17px;font-weight:800}
+html body .sauve .svDirect{font-size:18px}
+html body .sauve .svExpl{background:rgba(255,255,255,.08);color:#fff;box-shadow:none;border:1.5px solid rgba(245,197,66,.65);font-size:16px}
+html body .sauve #btnInstaller{margin-bottom:8px}
+.sv-plus{font-size:13px;line-height:1.45;margin:12px 0 0;color:#ffe9c9;background:rgba(255,255,255,.05);border:1px dashed rgba(245,197,66,.5);border-radius:12px;padding:8px 10px}
+.sv-plus b{color:#f7cf4f}
+.sv-ok{color:#3dff7a;font-weight:800;text-align:center;margin:12px 0}
+@keyframes svPulse{50%{box-shadow:0 0 24px rgba(245,197,66,.8)}}
+/* fenêtre d'explication */
+.gOv{position:fixed;inset:0;z-index:90;background:rgba(20,2,8,.94);overflow-y:auto;padding:max(14px,env(safe-area-inset-top,0px)) 14px max(20px,env(safe-area-inset-bottom,0px))}
+.gOv[hidden]{display:none}
+.gBox{position:relative;max-width:390px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:12px;color:#fff}
+html body .gX{position:absolute;top:0;right:0;width:40px;height:40px;min-height:0;padding:0;margin:0;border-radius:50%;background:#fff;color:#3a0612;font-size:18px;box-shadow:none}
+.gBravo{font:900 22px Georgia,serif;color:#3dff7a;margin-top:6px}
+.gTitre{font:900 23px/1.15 Georgia,'Times New Roman',serif;text-align:center;color:#f7cf4f;margin:4px 44px 0;text-wrap:balance;text-shadow:0 2px 0 #4a2c00}
+.gOv .os{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;width:100%}
+html body .gOv .os button{margin:0;min-height:0;font-size:14px;padding:8px 4px;line-height:1.15;background:#fff;color:#3a0612;border-radius:12px;box-shadow:none}
+.gOv .os button small{display:block;white-space:nowrap;font-size:11px;font-weight:600;opacity:.75}
+html body .gOv .os button.on{background:var(--or-g)}
+.gSimple{width:100%;display:flex;flex-direction:column;gap:10px}
+.gs{display:flex;flex-direction:column;gap:0;background:#fff;color:#3a0612;border-radius:18px;padding:12px 14px;border:3px solid #f5c542}
+.gsH{display:flex;align-items:center;gap:12px}
+.gs .n{flex:none;width:38px;height:38px;border-radius:50%;background:#d7263d;color:#fff;font:900 20px Georgia,serif;display:flex;align-items:center;justify-content:center}
+.gs .t{font-size:16.5px;font-weight:700;line-height:1.3}
+.gs .t small{display:block;font-weight:500;font-size:14px;color:#6b4a52;margin-top:3px}
+.gs.fin{border-color:#1fa35c}.gs.fin .n{background:#1fa35c}
+html body .gEssai{width:100%;margin:0;background:#1fa35c;color:#fff;font-size:19px;border-radius:14px}
+.vr{position:relative;margin-top:10px;border-radius:14px;overflow:hidden;border:2px solid #d0d0d6;background:#fff;color:#000;text-align:left}
+.vr.ios{font-family:-apple-system,'SF Pro Text','Helvetica Neue',Arial,sans-serif}
+.vr.and{font-family:Roboto,Arial,sans-serif}
+.vPage{height:56px;display:flex;align-items:center;justify-content:center;background:linear-gradient(#7a0618,#3a0612);color:#f7cf4f;font-size:13px;font-weight:700}
+.cible{position:relative;outline:3px solid #d7263d;outline-offset:2px;border-radius:10px;animation:vPulse 1.2s infinite}
+@keyframes vPulse{50%{outline-color:rgba(215,38,61,.25)}}
+.vDoigt{position:absolute;right:-6px;bottom:-30px;font-size:26px;z-index:3;pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.3))}
+.iBar{display:flex;justify-content:space-around;align-items:center;height:52px;background:#f7f7f8;border-top:1px solid #d8d8dc;color:#007aff;padding-bottom:6px}
+.iBar .ic{width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-size:24px}
+.iBar .vDoigt{bottom:auto;top:-30px;right:-22px;transform:rotate(180deg)}
+.iSheet{background:#f2f2f7;padding:8px}
+.iRow{display:flex;justify-content:space-between;align-items:center;background:#fff;padding:11px 12px;font-size:15px;border-bottom:1px solid #e5e5ea}
+.iRow:first-child{border-radius:10px 10px 0 0}.iRow:last-child{border-radius:0 0 10px 10px;border-bottom:0}
+.iRow span{font-size:17px;color:#333;display:flex}
+.iRow.cible{border-radius:8px;z-index:2}
+.iRow .vDoigt{right:44px;bottom:-26px}
+.cBar{display:flex;align-items:center;height:52px;padding:0 10px;background:#f7f7f8;border-bottom:1px solid #e0e0e0}
+.cAdr{flex:1;display:flex;align-items:center;justify-content:space-between;background:#e9e9ee;border-radius:12px;padding:4px 4px 4px 12px;font-size:13px;color:#222}
+.cAdr .ic{width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:#1a73e8}
+.cAdr .vDoigt{right:-4px;bottom:-30px}
+.iHead{display:flex;justify-content:space-between;align-items:center;padding:12px;font-size:14px;background:#f7f7f8;border-bottom:1px solid #e5e5ea}
+.iHead b{font-size:14px}.bleu{color:#007aff}.gras{font-weight:700}.iHead .cible{padding:2px 6px}
+.iApp{display:flex;gap:10px;align-items:center;padding:12px;font-size:15px}
+.iApp small{display:block;color:#8e8e93;font-size:12px}
+.vIco{flex:none;width:40px;height:40px;border-radius:10px;background:radial-gradient(circle at 35% 30%,#7a0618,#2a0610);color:#f7cf4f;font:900 15px Georgia,serif;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 2px #c8901a}
+.aBar{display:flex;align-items:center;gap:8px;height:52px;padding:0 8px;background:#fff;border-bottom:1px solid #e0e0e0;color:#444}
+.aIc{width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700}
+.aAdr{flex:1;min-width:0;background:#f1f3f4;border-radius:20px;padding:8px 12px;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aTab{width:20px;height:20px;border:2px solid #444;border-radius:5px;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.aMenu{background:#fff;padding:4px 0;box-shadow:inset 0 0 0 1px #eee}
+.aIcs{display:flex;justify-content:space-around;padding:8px 6px;font-size:19px;color:#444;border-bottom:1px solid #eee}
+.aRow{padding:11px 16px;font-size:15px;color:#202124}
+.aRow.cible{border-radius:6px;margin:0 6px}
+.aRow .vDoigt{right:20px;bottom:-24px}
+.vr.fonce{background:rgba(0,0,0,.45);padding:16px 14px}
+.aDlg{background:#fff;border-radius:22px;padding:18px 18px 12px;font-size:16px;color:#202124}
+.aApp{display:flex;gap:10px;align-items:center;margin:14px 0;font-size:15px}
+.aBtns{display:flex;justify-content:flex-end;gap:22px;color:#1a73e8;font-weight:600;font-size:15px}
+.aBtns .cible{padding:2px 8px}
+/* guide en direct (main + étapes) */
+.gDirect{position:fixed;inset:0;z-index:95;pointer-events:none}
+.gDirect[hidden]{display:none}
+.gdBandeau{pointer-events:auto;position:absolute;left:10px;right:10px;top:calc(10px + env(safe-area-inset-top,0px));background:linear-gradient(160deg,#3a0612,#14020a);color:#fff4e0;border:2px solid #f5c542;border-radius:18px;padding:12px 44px 12px 14px;box-shadow:0 0 24px rgba(245,197,66,.45),0 10px 24px rgba(0,0,0,.5)}
+.gDirect:not(.bas) .gdBandeau{top:auto;bottom:calc(14px + env(safe-area-inset-bottom,0px))}
+.gdTitre{font:900 19px Georgia,serif;color:#f7cf4f}
+.gdEtapes{list-style:none;margin:6px 0 0;padding:0;counter-reset:gd;font-size:15px;line-height:1.4;font-weight:700}
+.gdEtapes li{counter-increment:gd;position:relative;margin:3px 0;padding:5px 30px 5px 34px;border-radius:10px;opacity:.7;transition:background .3s,transform .3s}
+.gdEtapes li::before{content:counter(gd);position:absolute;left:6px;top:5px;width:22px;height:22px;border-radius:50%;background:rgba(245,197,66,.25);color:#f5c542;font-size:13px;display:flex;align-items:center;justify-content:center}
+.gdEtapes b{color:#f7cf4f}.gdEtapes small{display:block;opacity:.8;font-size:12.5px}
+.gdEtapes li .gdM{display:none}
+.gdEtapes li.actif{opacity:1;background:rgba(245,197,66,.16);transform:scale(1.02);box-shadow:0 0 0 2px #f5c542 inset}
+.gdEtapes li.actif .gdM{display:inline-block;position:absolute;right:6px;top:2px;font-size:20px;animation:gdTapeH 1s ease-in-out infinite}
+.gdEtapes li.actif::before{background:#f5c542;color:#3a0612}
+html body .gdX{position:absolute;top:8px;right:8px;width:32px;height:32px;min-height:0;margin:0;padding:0;border-radius:50%;background:rgba(255,255,255,.15);color:#fff;font-size:15px;border:0;box-shadow:none}
+.gdMain{position:absolute;display:flex;flex-direction:column;align-items:center;gap:2px}
+.gdMain.bas{left:50%;transform:translateX(-50%);bottom:calc(8px + env(safe-area-inset-bottom,0px))}
+.gdMain.haut{right:12px;align-items:flex-end;top:calc(4px + env(safe-area-inset-top,0px))}
+.gdDoigt{font-size:54px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.5));animation:gdTape 1s ease-in-out infinite}
+.gdMain.haut .gdRond{order:1}.gdMain.haut .gdDoigt{order:2;animation-name:gdTapeH}.gdMain.haut .gdTxt{order:3}
+.gdTxt{font:900 15px Georgia,serif;color:#3a0612;background:var(--or-g);border:2px solid #3a0612;border-radius:999px;padding:3px 12px;box-shadow:0 0 14px rgba(245,197,66,.8)}
+.gdMain.bas .gdTxt{order:-1}
+.gdRond{width:46px;height:46px;border-radius:50%;border:4px solid #f5c542;box-shadow:0 0 18px #f5c542;animation:gdOnde 1.2s ease-out infinite}
+.gdMain.bas .gdRond{order:3;margin-top:-6px}
+@keyframes gdTape{50%{transform:translateY(10px) scale(.92)}}
+@keyframes gdTapeH{50%{transform:translateY(-10px) scale(.92)}}
+@keyframes gdOnde{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.5);opacity:0}}
+@media (prefers-reduced-motion:reduce){.svBadge,.cible,.gdDoigt,.gdRond{animation:none}}
+html body .gOv .os button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;text-align:center}
+.gOv .os button small{white-space:normal!important}
+.gOv{background:rgba(20,2,8,.985)!important}
+.gOv{z-index:9990!important;background:#14020a!important}.gDirect{z-index:9995!important}
 </style><script>/* QR Code — Copyright (c) 2009 Kazuhiko Arase, licence MIT (via qrcode-terminal) */
 var MCQR=(function(){var M={},C={};function require(n){n=n.replace(/^\.\//,"").replace(/\.js$/,"");if(C[n])return C[n].exports;var m=C[n]={exports:{}};M[n](m,m.exports,require);return m.exports}
 M['QR8bitByte']=function(module,exports,require){
@@ -2644,7 +2782,13 @@ function notifInterface(btn, aide, fn, args) {
 })();
 
 /* ===== Page client ===== */
+/* Carte rangée dans l'adresse (#carte=CODE.JETON) : l'icône de l'écran d'accueil rouvre directement la bonne carte */
+(function () {
+  const m = location.hash.match(/carte=([A-Za-z0-9]{6})\.([^&]+)/);
+  if (m) store('mc_session', { code: m[1].toUpperCase(), jeton: decodeURIComponent(m[2]) });
+})();
 let session = store('mc_session');   // {code, jeton}
+function adresseCarte() { try { history.replaceState(null, '', location.pathname + (session ? '#carte=' + session.code + '.' + encodeURIComponent(session.jeton) : '')); } catch (e) {} }
 let fiche = null, chargement = false;
 
 function vue(nom) { document.querySelectorAll('.vue').forEach(v => v.hidden = v.id !== 'v-' + nom); window.scrollTo(0, 0); }
@@ -2675,7 +2819,7 @@ $('fInscr').onsubmit = e => {
       let infosOk = true;
       try { await rpc('mc_mes_infos', { p_jeton: session.jeton, p_tel: tel, p_email: mail, p_ville: ville, p_promos: $('iPromo').checked }); } catch (e) { infosOk = false; }
       await charger(true); vue('carte');
-      toast(ICON('gift') + 'Bienvenue ! 15 points offerts');
+      toast(ICON('gift') + 'Bienvenue ! 15 points offerts'); adresseCarte(); Guide.apresInscription();
       if (!infosOk) { ouvrirInfos(false); $('nTel').value = tel; $('nMail').value = mail; $('nVille').value = ville; $('nPromo').checked = $('iPromo').checked; }
     } catch (e) { err(e.message); }
   });
@@ -2688,7 +2832,7 @@ $('fCx').onsubmit = e => {
   occupe($('bCx'), async () => {
     try {
       session = await rpc('mc_connexion', { p_code: code, p_pin: pin });
-      store('mc_session', session); store('mc_visites', 1); await charger(true); vue('carte');
+      store('mc_session', session); store('mc_visites', 1); adresseCarte(); await charger(true); vue('carte');
     } catch (err) { $('eCx').textContent = err.message; }
   });
 };
@@ -2702,6 +2846,7 @@ function afficher(f, premier) {
     $('kPts').classList.remove('ptsflash'); void $('kPts').offsetWidth; $('kPts').classList.add('ptsflash');
     if (f.points > avant) toast(ICON('spark') + '+' + (f.points - avant) + ' points !');
   }
+  $('svCode').textContent = f.code; if (!/carte=/.test(location.hash)) adresseCarte();
   if ($('kCode').textContent !== f.code) {
     $('kCode').textContent = f.code;
     dessinerQR($('kQR'), lien('caisse.html') + '#c=' + f.code);
@@ -2751,7 +2896,7 @@ async function charger(premier) {
   if (!session || chargement) return; chargement = true;
   try { afficher(await rpc('mc_ma_carte', { p_jeton: session.jeton }), premier); chargerMessages(); Roue.charger(); }
   catch (e) {
-    if (/Session expirée/.test(e.message)) { store('mc_session', null); session = null; fiche = null; vue('accueil'); }
+    if (/Session expirée/.test(e.message)) { store('mc_session', null); session = null; fiche = null; adresseCarte(); vue('accueil'); }
     else if (premier) throw e; else erreur(e);
   } finally { chargement = false; }
 }
@@ -2822,7 +2967,7 @@ $('fInfos').onsubmit = e => {
 $('bMaj').onclick = () => occupe($('bMaj'), () => charger(false));
 $('bSortir').onclick = async () => {
   if (!await demander('Se déconnecter ?', 'Note bien le code de ta carte (' + (fiche ? fiche.code : '') + ') et ton code secret pour la retrouver.', 'Se déconnecter')) return;
-  store('mc_session', null); session = null; fiche = null; $('kCode').textContent = ''; onglet(true); vue('accueil');
+  store('mc_session', null); session = null; fiche = null; $('kCode').textContent = ''; adresseCarte(); onglet(true); vue('accueil');
 };
 
 /* Mise à jour automatique quand l'écran est allumé */
@@ -2838,7 +2983,7 @@ document.addEventListener('visibilitychange', () => {
   chargerStand();
   if (MC.KEY.indexOf('__') === 0 && !window.MC_TEST_URL) $('cleManquante').innerHTML = '<div class="bandeauCle">Appli pas encore branchée à la base de données</div>';
   if (session) { visite(); vue('carte'); try { await charger(true); proposerInfos(); } catch (e) { erreur(e); } }
-  else vue('accueil');
+  else { vue('accueil'); if (((window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true) && !/android/i.test(navigator.userAgent || '')) { $('perduIcone').hidden = false; onglet(true); } }
 })();
 
 /* ===== Le jeu des pièces : pousse-pièces de fête foraine, vue de face ===== */
@@ -3542,4 +3687,80 @@ async function chargerStand() {
     $('kFoires').innerHTML = s.foires.map(f => '<div class="prochFoire' + (f.en_cours ? ' ici' : '') + '"><span class="pfIc">' + ICON('pin') + '</span><span><b>' + esc(f.ville) + '</b><small>du ' + jr(f.debut) + ' au ' + jr(f.fin) + '</small>' + (f.en_cours ? '<em>En ce moment</em>' : '') + '</span></div>').join('');
   } catch (e) {}
 }
+
+/* ===== Guide « Garde ton appli sur ton smartphone » (comme IBIZOU) ===== */
+const Guide = (() => {
+  const ua = navigator.userAgent || '';
+  const estInstalle = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+  const estAndroid = /android/i.test(ua);
+  const ADR = 'casinomontecarloelvis-stand.github.io';
+  let gos = estAndroid ? 'and' : (/CriOS/i.test(ua) ? 'chr' : 'ios'), promptInstall = null;
+
+  const SV_SHARE = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5"/><path d="M8 10H6a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1h-2"/></svg>';
+  const SV_PLUS = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8.5v7M8.5 12h7"/></svg>';
+  const DOIGT = '<span class="vDoigt">👆</span>', ICO = '<span class="vIco">MC</span>';
+  const ETAPES = {
+    ios: [
+      { t: 'Appuie sur le bouton <b>Partager</b> en bas de l\'écran.<small>Si tu ne le vois pas, appuie d\'abord sur <b>•••</b> en bas à droite.</small>',
+        v: '<div class="vr ios"><div class="vPage">Monte-Carlo · ta carte</div><div class="iBar"><span class="ic">‹</span><span class="ic">›</span><span class="ic cible">' + SV_SHARE + DOIGT + '</span><span class="ic">📖</span><span class="ic">⧉</span></div></div>' },
+      { t: 'Fais glisser vers le haut et appuie sur <b>Sur l\'écran d\'accueil</b>.',
+        v: '<div class="vr ios"><div class="iSheet"><div class="iRow">Copier<span>⧉</span></div><div class="iRow">Ajouter aux favoris<span>📖</span></div><div class="iRow">Ajouter à la liste de lecture<span>👓</span></div><div class="iRow cible">Sur l\'écran d\'accueil<span>' + SV_PLUS + '</span>' + DOIGT + '</div><div class="iRow">Rechercher dans la page<span>🔍</span></div></div></div>' },
+      { t: 'Appuie sur <b>Ajouter</b> en haut à droite.',
+        v: '<div class="vr ios"><div class="iHead"><span class="bleu">Annuler</span><b>Sur l\'écran d\'accueil</b><span class="bleu gras cible">Ajouter' + DOIGT + '</span></div><div class="iApp">' + ICO + '<div><b>Monte-Carlo</b><small>' + ADR + '</small></div></div></div>' }
+    ],
+    chr: [
+      { t: 'Appuie sur le bouton <b>Partager</b> en haut à droite, dans la barre d\'adresse.<small>Si tu ne le vois pas : appuie sur <b>•••</b> en bas à droite, puis sur <b>Partager</b>.</small>',
+        v: '<div class="vr ios"><div class="cBar"><span class="cAdr">🔒 ' + ADR.slice(0, 22) + '…<span class="ic cible">' + SV_SHARE + DOIGT + '</span></span></div><div class="vPage">Monte-Carlo · ta carte</div></div>' },
+      null, null
+    ],
+    and: [
+      { t: 'Appuie sur les <b>3 petits points ⋮</b> en haut à droite.<small>Sur un <b>Samsung</b>, c\'est le bouton <b>≡</b> en bas à droite.</small>',
+        v: '<div class="vr and"><div class="aBar"><span class="aIc">⌂</span><span class="aAdr">🔒 ' + ADR + '</span><span class="aTab">1</span><span class="aIc cible">⋮' + DOIGT + '</span></div><div class="vPage">Monte-Carlo · ta carte</div></div>' },
+      { t: 'Appuie sur <b>Ajouter à l\'écran d\'accueil</b>.<small>Parfois c\'est écrit <b>Installer l\'application</b>. Sur Samsung : <b>Ajouter page à</b> puis <b>Écran d\'accueil</b>.</small>',
+        v: '<div class="vr and"><div class="aMenu"><div class="aIcs"><span>→</span><span>☆</span><span>⤓</span><span>ⓘ</span><span>↻</span></div><div class="aRow">Historique</div><div class="aRow">Partager…</div><div class="aRow">Traduire…</div><div class="aRow cible">Ajouter à l\'écran d\'accueil' + DOIGT + '</div><div class="aRow">Paramètres</div></div></div>' },
+      { t: 'Appuie sur <b>Ajouter</b>.',
+        v: '<div class="vr and fonce"><div class="aDlg"><b>Ajouter à l\'écran d\'accueil</b><div class="aApp">' + ICO + 'Monte-Carlo</div><div class="aBtns"><span>Annuler</span><span class="cible">Ajouter' + DOIGT + '</span></div></div></div>' }
+    ]
+  };
+
+  function rendu() {
+    const l = ETAPES[gos].map((e, k) => e || ETAPES.ios[k]);
+    $('gSimple').innerHTML = l.map((e, k) => '<div class="gs"><div class="gsH"><span class="n">' + (k + 1) + '</span><div class="t">' + e.t + '</div></div>' + e.v + '</div>').join('') +
+      '<div class="gs fin"><div class="gsH"><span class="n">✓</span><div class="t">C\'est fini ! L\'icône <b>Monte-Carlo</b> est sur ton écran : elle ouvre directement ta carte avec tes points.</div></div></div>';
+  }
+  function choisir(o) { gos = o; ['ios', 'chr', 'and'].forEach(x => $('gB' + x).classList.toggle('on', x === o)); rendu(); }
+  function ouvrir(bravo) { $('gBravo').hidden = !bravo; choisir(gos); $('gOv').hidden = false; try { localStorage.setItem('mc_guide_vu', '1'); } catch (e) {} }
+  function fermer() { $('gOv').hidden = true; }
+
+  function direct() {
+    if (estAndroid && promptInstall) { installer(); return; }
+    const chromeIos = /CriOS/i.test(ua), g = $('gDirect'), mn = $('gdMain');
+    let et, pos;
+    if (estAndroid) { et = ['Touche les <b>3 petits points ⋮</b> en haut à droite <small>(Samsung : ≡ en bas à droite)</small>', 'Choisis <b>Ajouter à l\'écran d\'accueil</b> ou <b>Installer</b>', 'Touche <b>Ajouter</b>']; pos = 'haut'; }
+    else if (chromeIos) { et = ['Touche le bouton <b>Partager ⬆</b> en haut à droite', 'Choisis <b>Sur l\'écran d\'accueil</b>', 'Touche <b>Ajouter</b>']; pos = 'haut'; }
+    else { et = ['Touche le <b>lien</b> en bas de l\'écran <small>(la barre avec ' + ADR + ')</small>', 'Touche les <b>3 petits points •••</b>', 'Touche <b>Partager ⬆</b>', '<b>Glisse vers le bas</b> dans le menu', 'Touche <b>Sur l\'écran d\'accueil ➕</b>', 'Touche <b>Ajouter</b> en haut à droite']; pos = 'bas'; }
+    $('gdEtapes').innerHTML = et.map(t => '<li><span class="gdM">👉</span>' + t + '</li>').join('');
+    clearInterval(g._a); let k = 0; const lis = [...$('gdEtapes').children];
+    const pas = () => { lis.forEach((l, x) => l.classList.toggle('actif', x === k)); k = (k + 1) % lis.length; }; pas(); g._a = setInterval(pas, 2200);
+    mn.className = 'gdMain ' + pos; mn.querySelector('.gdDoigt').textContent = pos === 'bas' ? '👇' : '👆';
+    g.classList.toggle('bas', pos === 'bas'); g.hidden = false; clearTimeout(g._t); g._t = setTimeout(() => { g.hidden = true; clearInterval(g._a); }, 60000);
+  }
+  async function installer() { if (!promptInstall) return false; promptInstall.prompt(); try { await promptInstall.userChoice; } catch (e) {} promptInstall = null; $('btnInstaller').hidden = true; return true; }
+
+  ['ios', 'chr', 'and'].forEach(x => { $('gB' + x).onclick = () => choisir(x); });
+  $('gX').onclick = fermer;
+  $('gEssai').onclick = () => { fermer(); if (!estInstalle) direct(); };
+  $('btnGuide').onclick = async () => { if (estAndroid && promptInstall && await installer()) return; ouvrir(false); };
+  $('btnDirect').onclick = direct;
+  $('gdX').onclick = () => { const g = $('gDirect'); g.hidden = true; clearInterval(g._a); };
+  $('btnInstaller').onclick = installer;
+  if (estInstalle) { $('sauve').hidden = true; $('svOk').hidden = false; }
+  window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); promptInstall = e; $('btnInstaller').hidden = false; });
+  window.addEventListener('appinstalled', () => { $('btnInstaller').hidden = true; $('sauve').hidden = true; $('svOk').hidden = false; });
+
+  return {
+    estInstalle,
+    apresInscription() { if (estInstalle) return; let vu = null; try { vu = localStorage.getItem('mc_guide_vu'); } catch (e) {} if (!vu) setTimeout(() => ouvrir(true), 900); }
+  };
+})();
 </script></body></html>
