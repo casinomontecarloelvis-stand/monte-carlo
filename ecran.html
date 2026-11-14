@@ -1326,6 +1326,33 @@ html body .vOr.vBronze .prochFoire :is(b,span){color:#fff!important;-webkit-text
 html body .vOr.vBronze .prochFoire small{color:rgba(255,240,215,.8)!important;-webkit-text-fill-color:rgba(255,240,215,.8)!important}
 html body .vOr.vBronze .prochFoire em{color:#2a0610!important;-webkit-text-fill-color:#2a0610!important}
 html body .vOr.vRose .bon :is(span,small){color:#fff4e0!important;-webkit-text-fill-color:#fff4e0!important}
+/* ===== Rideau de théâtre à l'ouverture ===== */
+.rideauOuv{position:fixed;inset:0;z-index:9999;overflow:hidden;cursor:pointer}
+.rideauOuv[hidden]{display:none}
+.rdG,.rdD{position:absolute;top:0;bottom:0;width:51%;
+  background:linear-gradient(180deg,rgba(0,0,0,.45),transparent 18%,transparent 80%,rgba(0,0,0,.5)),
+    repeating-linear-gradient(90deg,#4a0310 0,#9e0f26 18px,#d7263d 30px,#a3112a 42px,#4a0310 58px);
+  box-shadow:inset 0 0 60px rgba(0,0,0,.6);transition:transform 2.6s cubic-bezier(.6,0,.3,1),filter 2.6s}
+.rdG{left:0;transform-origin:left center;border-right:3px solid #2a0208}
+.rdD{right:0;transform-origin:right center;border-left:3px solid #2a0208}
+.frange{position:absolute;left:0;right:0;bottom:0;height:22px;background:
+  linear-gradient(180deg,#f7d36a,#b07a10 40%,transparent 41%),repeating-linear-gradient(90deg,#f5c542 0 3px,#8a5a08 3px 5px,transparent 5px 7px);
+  -webkit-mask:linear-gradient(#000,#000);opacity:.95}
+.rdLambr{position:absolute;left:-2%;right:-2%;top:0;height:13%;min-height:70px;z-index:2;
+  background:radial-gradient(60px 40px at 50% 0,transparent 0,transparent 0) ,
+    linear-gradient(180deg,#5a0412,#a3112a 55%,#6e0718);
+  -webkit-mask:radial-gradient(42px 26px at 50% 100%,transparent 98%,#000) 0 0/84px 100%,linear-gradient(#000 0 0) top/100% 70% no-repeat;
+  mask:radial-gradient(42px 26px at 50% 100%,transparent 98%,#000) 0 0/84px 100%,linear-gradient(#000 0 0) top/100% 70% no-repeat;
+  box-shadow:0 6px 18px rgba(0,0,0,.6);border-bottom:4px solid #c8901a;transition:transform 2.2s cubic-bezier(.6,0,.3,1) .5s}
+.rdLambr::after{content:"";position:absolute;left:0;right:0;top:62%;height:5px;background:linear-gradient(90deg,#8a5a08,#ffe58a,#c8901a,#ffe58a,#8a5a08)}
+.rdMed{position:absolute;left:50%;top:46%;width:min(150px,40vw);aspect-ratio:1;transform:translate(-50%,-50%);z-index:3;border-radius:50%;padding:6px;
+  background:conic-gradient(#fff3b0,#b07a10,#ffe58a,#8a5a08,#fff3b0);box-shadow:0 0 30px rgba(245,197,66,.6),0 10px 30px rgba(0,0,0,.6);transition:opacity .9s,transform 1.2s}
+.rdMed img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.rideauOuv.ouvert .rdG{transform:translateX(-96%) scaleX(.35);filter:brightness(.8)}
+.rideauOuv.ouvert .rdD{transform:translateX(96%) scaleX(.35);filter:brightness(.8)}
+.rideauOuv.ouvert .rdLambr{transform:translateY(-110%)}
+.rideauOuv.ouvert .rdMed{opacity:0;transform:translate(-50%,-50%) scale(1.4)}
+.rideauOuv.ouvert{pointer-events:none}
 </style><script>/* QR Code — Copyright (c) 2009 Kazuhiko Arase, licence MIT (via qrcode-terminal) */
 var MCQR=(function(){var M={},C={};function require(n){n=n.replace(/^\.\//,"").replace(/\.js$/,"");if(C[n])return C[n].exports;var m=C[n]={exports:{}};M[n](m,m.exports,require);return m.exports}
 M['QR8bitByte']=function(module,exports,require){
