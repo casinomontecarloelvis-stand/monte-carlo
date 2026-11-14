@@ -1242,6 +1242,90 @@ html body .gOv .os button{display:flex;flex-direction:column;align-items:center;
 .gOv .os button small{white-space:normal!important}
 .gOv{background:rgba(20,2,8,.985)!important}
 .gOv{z-index:9990!important;background:#14020a!important}.gDirect{z-index:9995!important}
+/* ===== Essais de fenêtres ===== */
+/* 3 · panneau lumineux : les couleurs se baladent sur tout le fond, comme les LED */
+html body .vCoul{position:relative;isolation:isolate;overflow:visible;background:#0b0105!important;border:0!important;box-shadow:none!important}
+html body .vCoul::before,html body .vCoul::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+  background-image:linear-gradient(115deg,#ff2d55,#ff9f1a,#ffe23d,#2bd96b,#1fd2ff,#3d6bff,#a24dff,#ff3dd2,#ff2d55,#ff9f1a,#ffe23d,#2bd96b,#1fd2ff);
+  background-size:300% 300%;animation:balade 9s linear infinite}
+html body .vCoul::before{filter:blur(18px);opacity:.55;transform:scale(1.02)}
+html body .vCoul::after{opacity:.78;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35),inset 0 0 40px rgba(0,0,0,.45)}
+html body .vCoul>.diffuseur{position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+  background:radial-gradient(circle,rgba(255,255,255,.25) 0 1.1px,transparent 1.6px) 0 0/7px 7px,radial-gradient(120% 90% at 50% 40%,rgba(255,255,255,.12),rgba(0,0,0,.35) 85%)}
+html body .vCoul>*{position:relative}
+html body .vCoul h4{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7),0 0 12px rgba(255,255,255,.35)}
+html body .vCoul .prochFoire{background:rgba(10,0,6,.55);border-color:rgba(255,255,255,.3)}
+html body .vCoul .prochFoire small{color:rgba(255,255,255,.88)}
+@keyframes balade{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+@media (prefers-reduced-motion:reduce){html body .vCoul::before,html body .vCoul::after{animation:none}}
+html body .vCoul h4,html body .vCoul h4 *{color:#fff!important;-webkit-text-fill-color:#fff!important;background-image:none;text-shadow:0 1px 3px rgba(0,0,0,.8),0 0 10px rgba(0,0,0,.45)!important}
+html body .vCoul h4 .ic,html body .vCoul h4 .ic *{color:#2a0610!important;-webkit-text-fill-color:#2a0610!important}
+html body .vCoul .ligneH,html body .vCoul .histo>div>div{border-color:rgba(255,255,255,.18)}
+html body .vCoul .aide,html body .vCoul small,html body .vCoul li{color:rgba(255,255,255,.9)}
+html body .vCoul .fil,html body .vCoul .msgForm textarea,html body .vCoul .bon{background:rgba(10,0,6,.55)!important}
+html body .vCoul .msgTete{background:transparent!important}
+html body .vCoul .msgTit b{color:#fff!important;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+html body .vCoul .notifAide.etapesNotif{background:rgba(10,0,6,.55)}
+
+/* ===== Fenêtres façon carte en or / en argent, avec un reflet qui bouge ===== */
+html body .vOr,html body .vArgent{position:relative;isolation:isolate;overflow:hidden;border:0!important;color:#2a1405;
+  box-shadow:0 10px 24px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.7),inset 0 -2px 0 rgba(0,0,0,.25)!important}
+html body .vOr{background:linear-gradient(125deg,#8a5a08 0%,#e6b13a 14%,#fff1a8 28%,#d39b22 42%,#ffe58a 58%,#a8740c 74%,#f7d36a 88%,#9a6a08 100%)!important}
+html body .vArgent{background:linear-gradient(125deg,#6b7078 0%,#c3c8cf 14%,#f7f8fa 28%,#9ba1a9 42%,#e6e9ed 58%,#7d838b 74%,#d9dde2 88%,#6f747c 100%)!important;color:#1a1d22}
+html body .vOr::before,html body .vArgent::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.35;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.18) 0 1px,rgba(0,0,0,.06) 1px 2px,transparent 2px 4px)}
+html body .vOr::after,html body .vArgent::after{content:"";position:absolute;inset:-20% -60%;z-index:-1;pointer-events:none;
+  background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.0) 44%,rgba(255,255,255,.75) 50%,rgba(255,255,255,0) 56%,transparent 60%);
+  transform:translateX(calc(var(--lx,0) * 1%)) rotate(var(--lr,0deg));transition:transform .25s ease-out}
+html body .vOr,html body .vArgent{background-size:160% 160%!important;background-position:calc(50% + var(--lx,0) * .4%) 50%!important;transition:background-position .25s ease-out}
+html body .vOr h4,html body .vArgent h4{color:#2a1405!important;-webkit-text-fill-color:#2a1405!important;background:none;text-shadow:0 1px 0 rgba(255,255,255,.6)!important}
+html body .vArgent h4{color:#1a1d22!important;-webkit-text-fill-color:#1a1d22!important}
+html body .vOr h4 .ic,html body .vArgent h4 .ic{color:#fff;-webkit-text-fill-color:currentColor}
+html body .vOr h4>.ic,html body .vArgent h4>.ic{background:linear-gradient(135deg,#5a0a1c,#2a0610)!important;box-shadow:0 2px 6px rgba(0,0,0,.35)!important}
+html body .vOr p,html body .vOr li,html body .vOr .aide,html body .vOr small,html body .vArgent p,html body .vArgent li,html body .vArgent .aide,html body .vArgent small{color:inherit}
+html body .vOr .aide,html body .vArgent .aide{opacity:.85}
+html body .vOr .msgTit b,html body .vOr .msgTit small{color:#2a1405!important;text-shadow:none}
+html body .vOr .msgTete .chev{color:#2a1405}
+html body .vOr .msgIc{background:linear-gradient(135deg,#5a0a1c,#2a0610)!important;color:#f7cf4f!important}
+html body .vOr .fil,html body .vOr textarea,html body .vOr .notifAide,html body .vArgent .bon,html body .vArgent .prochFoire{background:rgba(30,4,12,.82)!important;color:#fff4e0;border-color:rgba(0,0,0,.25)!important}
+html body .vArgent .prochFoire small,html body .vArgent .bon small{color:rgba(255,240,215,.75)}
+html body .vOr .notifAide.etapesNotif{color:#fff4e0}
+html body .vArgent .histo-l,html body .vArgent #kHisto>*{border-color:rgba(0,0,0,.15)!important}
+html body .vArgent #kHisto *{color:#1a1d22}
+html body .vArgent #kHisto small{color:#4a4f57}
+html body .vArgent #kHisto .p{color:#0a7a36;text-shadow:none}
+html body .vArgent #kHisto .m{color:#b0102a;text-shadow:none}
+html body .vArgent #kHisto .ligne{border-color:rgba(0,0,0,.15)}
+html body .vOr .infoL span{color:#2a1405}
+html body .vOr .garantie li::before,html body .garantie.vOr li::before{filter:saturate(1.3)}
+html body .vOr :is(p,li,span,small,.aide,.vide),html body .vArgent :is(p,li,span,small,.aide,.vide){text-shadow:none!important}
+html body .vOr>p,html body .vOr>ul li,html body .vOr #kInfos .aide,html body .vOr #kInfos p,html body .vOr .vide{color:#3a1d05!important;-webkit-text-fill-color:#3a1d05!important;opacity:1}
+html body .vArgent #kHisto span,html body .vArgent .vide,html body .vArgent>p{color:#1a1d22!important;-webkit-text-fill-color:#1a1d22!important}
+html body .vArgent #kHisto small{color:#4a4f57!important;-webkit-text-fill-color:#4a4f57!important}
+html body .vArgent #kHisto .p{color:#0a7a36!important;-webkit-text-fill-color:#0a7a36!important}
+html body .vArgent #kHisto .m{color:#b0102a!important;-webkit-text-fill-color:#b0102a!important}
+html body .vArgent .prochFoire :is(b,span){color:#fff!important;-webkit-text-fill-color:#fff!important}
+html body .vArgent .prochFoire small{color:rgba(255,240,215,.8)!important;-webkit-text-fill-color:rgba(255,240,215,.8)!important}
+html body .vArgent .prochFoire em{color:#2a0610!important;-webkit-text-fill-color:#2a0610!important}
+html body .vArgent .bon :is(span,small){color:#fff4e0!important;-webkit-text-fill-color:#fff4e0!important}
+/* ===== Autres métaux ===== */
+html body .vOr.vRose{background:linear-gradient(125deg,#8a4a3a 0%,#d98f7a 14%,#ffe1d6 28%,#c4786a 42%,#f6c2b2 58%,#9a5a4a 74%,#eab0a0 88%,#7e4436 100%)!important;color:#3a1410}
+html body .vOr.vBronze{background:linear-gradient(125deg,#5a3010 0%,#b0682a 14%,#f2b77a 28%,#9a5220 42%,#e0a060 58%,#6e3a14 74%,#c98a4a 88%,#4e2a0c 100%)!important;color:#2a1405}
+html body .vOr.vChamp{background:linear-gradient(125deg,#8a7a58 0%,#d8c8a0 14%,#fffaf0 28%,#c2b088 42%,#f0e6c8 58%,#9a8a66 74%,#e6dab8 88%,#857552 100%)!important;color:#2a2010}
+html body .vOr.vNoir{background:linear-gradient(125deg,#050505 0%,#1c1c1f 18%,#38383d 30%,#111113 46%,#2a2a2e 62%,#0a0a0b 80%,#222226 100%)!important;color:#f7e7b0;
+  box-shadow:0 10px 24px rgba(0,0,0,.6),inset 0 0 0 1.5px #c8901a,inset 0 0 0 3px rgba(0,0,0,.6),inset 0 0 0 4px rgba(245,197,66,.45)!important}
+html body .vOr.vNoir::after{background:linear-gradient(105deg,transparent 40%,rgba(245,197,66,0) 44%,rgba(245,197,66,.35) 50%,rgba(245,197,66,0) 56%,transparent 60%)}
+html body .vOr.vNoir h4{color:#f7cf4f!important;-webkit-text-fill-color:#f7cf4f!important;text-shadow:0 1px 0 #000!important}
+html body .vOr.vNoir h4>.ic{background:var(--or-g)!important;color:#2a0610!important}
+html body .vOr.vNoir #kInfos .aide,html body .vOr.vNoir #kInfos p,html body .vOr.vNoir .infoL span{color:#f3e2b5!important;-webkit-text-fill-color:#f3e2b5!important}
+html body .vOr.vRose h4{color:#3a1410!important;-webkit-text-fill-color:#3a1410!important}
+html body .vOr.vChamp h4,html body .vOr.vChamp>ul li{color:#2a2010!important;-webkit-text-fill-color:#2a2010!important}
+html body .vOr.vBronze h4{color:#1e0e02!important;-webkit-text-fill-color:#1e0e02!important;text-shadow:0 1px 0 rgba(255,220,180,.5)!important}
+html body .vOr.vBronze .prochFoire,html body .vOr.vRose .bon{background:rgba(30,4,12,.82)!important;color:#fff4e0}
+html body .vOr.vBronze .prochFoire :is(b,span){color:#fff!important;-webkit-text-fill-color:#fff!important}
+html body .vOr.vBronze .prochFoire small{color:rgba(255,240,215,.8)!important;-webkit-text-fill-color:rgba(255,240,215,.8)!important}
+html body .vOr.vBronze .prochFoire em{color:#2a0610!important;-webkit-text-fill-color:#2a0610!important}
+html body .vOr.vRose .bon :is(span,small){color:#fff4e0!important;-webkit-text-fill-color:#fff4e0!important}
 </style><script>/* QR Code — Copyright (c) 2009 Kazuhiko Arase, licence MIT (via qrcode-terminal) */
 var MCQR=(function(){var M={},C={};function require(n){n=n.replace(/^\.\//,"").replace(/\.js$/,"");if(C[n])return C[n].exports;var m=C[n]={exports:{}};M[n](m,m.exports,require);return m.exports}
 M['QR8bitByte']=function(module,exports,require){
