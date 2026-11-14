@@ -460,6 +460,11 @@ body{padding-left:max(30px,env(safe-area-inset-left,0px))!important;padding-righ
   <!-- ===== MA CARTE ===== -->
   <section class="vue" id="v-carte" hidden>
     <div class="carte">
+      <div class="salut" id="kSalut">Salut !</div>
+      <div class="pts" id="kPts">0</div><div class="unite">POINTS</div>
+      <canvas class="qr" id="kQR" aria-label="Mon QR code"></canvas>
+      <span class="code" id="kCode">······</span>
+      <p class="info">Montre ce QR code au stand pour gagner des points et des jetons.</p>
       <div class="bloc roueB" id="kRoueB" hidden>
         <div class="roueTitre"><span>★</span>Roue de la fortune<span>★</span></div>
         <div class="roue">
@@ -474,11 +479,6 @@ body{padding-left:max(30px,env(safe-area-inset-left,0px))!important;padding-righ
         <button type="button" id="bRoueP"><svg class="ic" aria-hidden="true"><use href="#i-coins"/></svg>Tourner pour 100 points</button>
         <p class="aide" id="kRoueAide" style="text-align:center"></p>
       </div>
-      <div class="salut" id="kSalut">Salut !</div>
-      <div class="pts" id="kPts">0</div><div class="unite">POINTS</div>
-      <canvas class="qr" id="kQR" aria-label="Mon QR code"></canvas>
-      <span class="code" id="kCode">······</span>
-      <p class="info">Montre ce QR code au stand pour gagner des points et des jetons.</p>
 
       <div class="fid">
         <div class="fidT"><div><span>Monte-Carlo · Jeu de pièces</span><h3>Carte fidélité</h3></div><small id="kFidN">0 / 10</small></div>
