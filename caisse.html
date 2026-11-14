@@ -440,24 +440,17 @@ body{padding-left:max(30px,env(safe-area-inset-left,0px))!important;padding-righ
       <div class="grille"><button class="vert" data-d="1">+1</button><button class="vert" data-d="3">+3</button><button class="vert" data-d="5">+5</button><button class="vert" data-d="10">+10</button></div>
       <div class="secT secO"><svg class="ic mini" aria-hidden="true"><use href="#i-coins"/></svg>Carte fidélité · <span id="cFid" style="margin-left:4px">0 / 10</span></div>
       <div class="grille" style="grid-template-columns:repeat(5,1fr)"><button class="or" data-e="10">10 €</button><button class="or" data-e="20">20 €</button><button class="or" data-e="30">30 €</button><button class="or" data-e="40">40 €</button><button class="or" data-e="50">50 €</button></div>
-      <div class="secT secM"><svg class="ic mini" aria-hidden="true"><use href="#i-ticket"/></svg>Tickets de tombola</div>
-      <div class="grille" style="grid-template-columns:repeat(3,1fr)"><button class="violet" data-t="1">+1 ticket</button><button class="violet" data-t="2">+2</button><button class="violet" data-t="5">+5</button></div>
       <div class="secT secR"><svg class="ic mini" aria-hidden="true"><use href="#i-minus"/></svg>Échanger des points contre des jetons</div>
       <div class="grille"><button data-d="-10">−10</button><button data-d="-20">−20</button><button data-d="-50">−50</button><button data-d="-100">−100</button></div>
       <div class="valid" id="valid" hidden><div class="calc" id="vCalc"></div><div id="vTxt" style="font-size:14px"></div><div class="bt"><button type="button" class="gris" id="vAnn">Annuler</button><button type="button" id="vOk"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Valider</button></div></div>
       <div id="cBons"></div>
-      <div class="ticketsC" id="cTickets"></div>
+
       <button type="button" class="gris suivant" id="bSuivant">Client suivant</button>
     </div>
 
     <div class="outilsT">Mes outils</div>
-    <div class="bloc tirage">
-      <h4><svg class="ic" aria-hidden="true"><use href="#i-dice"/></svg>Tirage de la tombola</h4>
-      <p style="margin:0;font-size:14px;color:rgba(255,240,215,.75)" id="tEnJeu">— tickets en jeu</p>
-      <div class="gagnantBox"><div class="gagnant" id="gagnant">—</div><small id="gagnantNom"></small></div>
-      <button type="button" id="tirer"><svg class="ic" aria-hidden="true"><use href="#i-dice"/></svg>Tirer un gagnant</button>
-      <button type="button" class="gris" id="bFinTombola" style="margin-top:10px" hidden>Terminer cette tombola</button>
-    </div>
+    <div class="bloc"><p style="margin:0;font-size:14px;color:rgba(255,240,215,.75)" id="tEnJeu">— clients</p></div>
+    <div class="bloc pubTombo"><div class="pubT"><svg class="ic" aria-hidden="true"><use href="#i-ticket"/></svg><div><b>Tombola Monte-Carlo</b><span>Retrouvez-nous bientôt pour la tombola au stand !</span></div></div></div>
     <div class="outil" id="oClients"><i class="chip"><svg class="ic" aria-hidden="true"><use href="#i-list"/></svg></i><b>Listing des clients</b><svg class="ic chev" aria-hidden="true"><use href="#i-chev"/></svg></div>
     <div class="bloc liste" id="pClients" hidden>
       <input id="rClient" placeholder="Chercher un prénom, un nom ou un code">
@@ -799,6 +792,169 @@ html body .fidT small{white-space:nowrap}
 
 /* logo carré arrondi */
 html body .logoImg{border-radius:22%!important;box-shadow:0 0 0 2px rgba(245,197,66,.7),0 18px 40px rgba(0,0,0,.55)}
+/* pub tombola */
+html body .pubTombo{background:linear-gradient(135deg,rgba(215,38,61,.55),rgba(90,7,22,.75))!important;border:1px dashed rgba(245,197,66,.7)!important}
+.pubT{display:flex;align-items:center;gap:13px}
+.pubT>.ic{width:22px;height:22px;padding:9px;box-sizing:content-box;border-radius:14px;background:var(--or-g);color:#2a0610;flex:none}
+.pubT b{display:block;color:#f7cf4f;font-size:16px}
+.pubT span{display:block;color:#fff4e0;font-weight:600;font-size:14px;margin-top:2px}
+/* classement */
+html body .rang.moi{border-color:#f5c542!important;background:rgba(245,197,66,.16)!important}
+.toi{font-style:normal;font-size:11px;background:var(--or-g);color:#2a0610;border-radius:999px;padding:1px 7px;margin-left:4px;vertical-align:2px}
+/* bouton du jeu */
+html body .jeuBtn{width:100%;display:flex!important;align-items:center;gap:13px;text-align:left;justify-content:flex-start!important;margin-top:14px;padding:14px!important;border-radius:22px!important;
+ background:linear-gradient(135deg,#ffe58a,#f5c542 40%,#c98c12)!important;color:#2a0610!important;box-shadow:0 12px 28px rgba(245,197,66,.35),inset 0 1px 0 rgba(255,255,255,.6)!important}
+.jeuBtn b{display:block;font-size:17px}.jeuBtn small{display:block;font-size:13px;font-weight:600;opacity:.8;margin-top:2px}
+.jeuBtn>span:nth-child(2){flex:1}
+.jeuIc{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:#2a0610;color:#f5c542;flex:none}
+.jeuIc .ic{width:24px;height:24px}
+/* fenêtre du jeu */
+#jeu{position:fixed;inset:0;z-index:300;display:flex;flex-direction:column;background:#120206;padding:max(10px,env(safe-area-inset-top)) 10px max(10px,env(safe-area-inset-bottom))}
+#jeu[hidden]{display:none!important}
+.jeuHaut{display:flex;align-items:center;gap:8px}
+.jeuHaut .btnIcone{font-size:18px}
+.jeuStat{flex:1;text-align:center;background:rgba(255,255,255,.07);border:1px solid rgba(245,197,66,.35);border-radius:14px;padding:5px 4px}
+.jeuStat span{display:block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,240,215,.65)}
+.jeuStat b{display:block;font-size:20px;color:#f7cf4f;font-variant-numeric:tabular-nums}
+.jeuZone{flex:1;min-height:0;display:grid;place-items:center;margin:10px 0 6px}
+#jeuCv{border-radius:18px;box-shadow:0 0 0 2px #f5c542,0 0 0 6px #3a0610,0 20px 50px rgba(0,0,0,.7);touch-action:none;cursor:pointer}
+.jeuAide{text-align:center;color:rgba(255,240,215,.7);font-size:13px;margin:0;font-weight:500}
+.jeuFin{position:absolute;inset:0;display:grid;place-items:center;background:rgba(5,0,3,.6);padding:20px}
+.jeuFin[hidden]{display:none!important}
+.jeuFin .orb{width:100%}
+
+html body .rang em.toi{color:#2a0610!important;font-size:11px!important}
+/* ---- LED fines et modernes autour des fenêtres ---- */
+@property --ledA{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes ledTour{to{--ledA:360deg}}
+.led{position:relative;isolation:isolate}
+.led::after{content:"";position:absolute;inset:-1.5px;border-radius:inherit;padding:1.5px;pointer-events:none;z-index:2;
+  background:conic-gradient(from var(--ledA),#ff3d5a,#ffb13d,#ffe23d,#3dff7a,#3dd2ff,#7a5cff,#ff3dd2,#ff3d5a);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
+  animation:ledTour 3s linear infinite;filter:drop-shadow(0 0 3px rgba(255,255,255,.55)) drop-shadow(0 0 6px rgba(255,120,200,.45))}
+html body .jeuStat.led{border-color:transparent;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.02))}
+html body .jeuBtn{position:relative;isolation:isolate}
+html body .jeuBtn::after{content:"";position:absolute;inset:-1.5px;border-radius:inherit;padding:1.5px;pointer-events:none;
+  background:conic-gradient(from var(--ledA),#ff3d5a,#ffb13d,#ffe23d,#3dff7a,#3dd2ff,#7a5cff,#ff3dd2,#ff3d5a);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
+  animation:ledTour 3s linear infinite;filter:drop-shadow(0 0 4px rgba(255,255,255,.5))}
+/* ---- fenêtre d'achat façon casino ---- */
+.achatBox{width:min(340px,100%);border-radius:28px;padding:26px 22px 18px;text-align:center;color:#fff6e6;overflow:hidden;
+  background:radial-gradient(120% 80% at 50% 0%,#8e0f22 0%,#3a0610 55%,#14030a 100%);box-shadow:0 0 0 3px #f5c542,0 0 0 7px #4a0612,0 0 40px rgba(245,197,66,.35),0 30px 60px rgba(0,0,0,.8)}
+.achatAmp{position:absolute;inset:3px;border-radius:25px;padding:15px;pointer-events:none;z-index:1;
+  background:radial-gradient(circle,#fff6c8 0 2.6px,transparent 3.2px) 0 0/15px 15px;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
+  filter:drop-shadow(0 0 3px #ffe58a);animation:ampoules .5s steps(1) infinite}
+@keyframes ampoules{50%{background-position:7.5px 0;filter:drop-shadow(0 0 4px #fff) hue-rotate(-20deg)}}
+.achatRay{position:absolute;left:50%;top:44%;width:560px;height:560px;margin:-280px 0 0 -280px;z-index:-1;opacity:.22;
+  background:repeating-conic-gradient(from 0deg,#f5c542 0 8deg,transparent 8deg 20deg);animation:rayons 18s linear infinite;
+  -webkit-mask:radial-gradient(circle,#000 0,transparent 65%);mask:radial-gradient(circle,#000 0,transparent 65%)}
+@keyframes rayons{to{transform:rotate(360deg)}}
+.achatHaut{position:relative;z-index:3;font-size:10.5px;letter-spacing:.22em;color:#f5c542;font-weight:800}
+.achatTitre{position:relative;z-index:3;font:900 26px/1.05 Georgia,serif;letter-spacing:.02em;margin:6px 0 10px;
+  background:linear-gradient(180deg,#fff6c8,#f5c542 55%,#a8740c);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #3a0610) drop-shadow(0 0 10px rgba(245,197,66,.45))}
+.achatPile{position:relative;z-index:3;height:58px;margin:4px auto 6px;width:120px}
+.achatPile i{position:absolute;left:30px;width:60px;height:16px;border-radius:50%;background:radial-gradient(60% 70% at 40% 35%,#fff3b0,#f5c542 45%,#a8740c);box-shadow:0 3px 0 #7a5200,0 5px 8px rgba(0,0,0,.5)}
+.achatPile i:nth-child(1){bottom:0}.achatPile i:nth-child(2){bottom:9px;left:33px}.achatPile i:nth-child(3){bottom:18px;left:28px}.achatPile i:nth-child(4){bottom:27px;left:32px}
+.achatPile i:nth-child(5){bottom:36px;left:30px;animation:piece 1.6s ease-in-out infinite}
+@keyframes piece{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.achatOffre{position:relative;z-index:3;display:flex;align-items:baseline;justify-content:center;gap:8px}
+.achatOffre b{font:900 56px/1 Poppins,Arial,sans-serif;color:#fff;text-shadow:0 0 18px rgba(255,229,138,.8),0 3px 0 #a8740c}
+.achatOffre span{font-weight:900;font-size:18px;letter-spacing:.12em;color:#f5c542}
+.achatPrix{position:relative;z-index:3;font-size:14px;color:rgba(255,240,215,.85);margin:2px 0 10px}.achatPrix b{color:#ffe58a}
+.achatBox #jaTxt{position:relative;z-index:3;font-size:13px;color:rgba(255,240,215,.7);margin:0 0 12px}
+html body .achatBtn{position:relative;z-index:3;width:100%;font-size:17px!important;letter-spacing:.04em;padding:15px!important;border-radius:16px!important;
+  background:linear-gradient(180deg,#fff3b8,#f5c542 50%,#c8961e)!important;color:#2a0610!important;box-shadow:0 0 0 2px #7a5200 inset,0 6px 0 #7a5200,0 10px 24px rgba(245,197,66,.45)!important;animation:pulseBtn 1.6s ease-in-out infinite}
+html body .achatBtn:disabled{animation:none;filter:grayscale(.6);opacity:.7}
+@keyframes pulseBtn{50%{box-shadow:0 0 0 2px #7a5200 inset,0 6px 0 #7a5200,0 10px 34px rgba(255,229,138,.85)}}
+.achatNon{position:relative;z-index:3;margin-top:10px;background:none;border:0;color:rgba(255,240,215,.6);font:600 14px Poppins,Arial,sans-serif;text-decoration:underline;padding:6px}
+.achatBox .erreurForm{position:relative;z-index:3}
+.achatBox .erreurForm:empty{display:none}
+html body .achatNon{background:none!important;box-shadow:none!important;border:0!important;width:auto!important}
+/* ---- cadres : LED fines ou ampoules de casino ---- */
+html body .bloc.led{position:relative;isolation:isolate;border-color:transparent!important}
+html body .bloc.marquee{position:relative;isolation:isolate;padding-top:22px!important;padding-bottom:22px!important}
+html body .bloc.marquee::before{content:"";position:absolute;inset:3px;border-radius:inherit;padding:12px;pointer-events:none;z-index:2;
+  background:radial-gradient(circle,#fff6c8 0 2.4px,transparent 3px) 0 0/12px 12px;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
+  filter:drop-shadow(0 0 3px #ffe58a);animation:ampoules2 .55s steps(1) infinite}
+@keyframes ampoules2{50%{background-position:6px 0;filter:drop-shadow(0 0 4px #fff) sepia(1) saturate(3) hue-rotate(-30deg)}}
+html body .bloc.marquee{box-shadow:0 0 0 2px #f5c542,0 0 24px rgba(245,197,66,.25)!important}
+/* ---- façade de casino : le jeu des pièces ---- */
+html body .facade{all:unset;box-sizing:border-box;display:block;width:100%;margin-top:16px;cursor:pointer;position:relative;text-align:center;-webkit-tap-highlight-color:transparent;
+  border-radius:26px 26px 18px 18px;overflow:hidden;padding:0 0 14px;
+  background:linear-gradient(180deg,#2a0610 0%,#5a0716 35%,#3a0610 100%);box-shadow:0 0 0 2px #f5c542,0 0 0 5px #3a0610,0 0 30px rgba(245,197,66,.3),0 18px 34px rgba(0,0,0,.6)}
+.facade:active{transform:scale(.985)}
+.facade::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;
+  background:repeating-linear-gradient(90deg,transparent 0 22px,rgba(245,197,66,.18) 22px 23px),radial-gradient(120% 60% at 50% 0,rgba(255,200,120,.35),transparent 70%)}
+.fcToit{position:relative;display:flex;align-items:center;justify-content:center;gap:8px;padding:9px 0 6px;font:800 10px Poppins,Arial,sans-serif;letter-spacing:.24em;color:#f5c542;
+  background:linear-gradient(180deg,#14030a,#2a0610);border-bottom:1px solid rgba(245,197,66,.5)}
+.fcEtoile{animation:scint 1.4s ease-in-out infinite}.fcEtoile:last-child{animation-delay:.7s}
+@keyframes scint{50%{opacity:.25;transform:scale(.7)}}
+.fcEnseigne{position:relative;display:block;margin:12px 16px 0;padding:18px 10px 16px;border-radius:18px;
+  background:radial-gradient(100% 120% at 50% 0,#8e0f22,#2a0610);box-shadow:0 0 0 3px #f5c542,0 0 0 6px #4a0612,0 0 26px rgba(245,197,66,.45)}
+.fcAmp{position:absolute;inset:2px;border-radius:16px;padding:12px;pointer-events:none;
+  background:radial-gradient(circle,#fff6c8 0 2.6px,transparent 3.2px) 0 0/12px 12px;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
+  filter:drop-shadow(0 0 3px #ffe58a);animation:ampoules2 .45s steps(1) infinite}
+.fcTxt{position:relative;display:block;font:900 30px/1.02 Georgia,serif;letter-spacing:.03em;
+  background:linear-gradient(180deg,#fff9d6,#f5c542 55%,#a8740c);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 0 #3a0610) drop-shadow(0 0 12px rgba(255,214,107,.75));animation:enseigne 2.4s ease-in-out infinite}
+@keyframes enseigne{50%{filter:drop-shadow(0 2px 0 #3a0610) drop-shadow(0 0 20px rgba(255,236,170,1))}}
+.fcBat{position:relative;display:flex;align-items:flex-end;justify-content:center;gap:10px;height:96px;margin:14px 16px 0}
+.fcCol{width:16px;height:100%;border-radius:4px 4px 2px 2px;background:linear-gradient(90deg,#7a5200,#ffe58a 45%,#c8961e 60%,#5c3a00);box-shadow:0 -4px 0 -1px #f5c542}
+.fcFen{width:38px;height:62%;align-self:center;border-radius:19px 19px 4px 4px;border:2px solid #f5c542;
+  background:linear-gradient(180deg,rgba(255,214,107,.85),rgba(255,140,60,.35));box-shadow:inset 0 0 10px rgba(255,255,255,.4),0 0 12px rgba(255,190,90,.6);animation:fenetre 3s ease-in-out infinite}
+.fcFen:nth-child(4){animation-delay:1.5s}
+@keyframes fenetre{50%{filter:brightness(1.35)}}
+.fcPorte{position:relative;width:110px;height:100%;border-radius:55px 55px 0 0;border:3px solid #f5c542;border-bottom:0;overflow:hidden;
+  background:radial-gradient(90% 80% at 50% 100%,#fff3c4,#ffb347 45%,#a8400c 100%);box-shadow:0 0 22px rgba(255,190,90,.75)}
+.fcLum{position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 100%,rgba(255,255,255,.35) 0 6deg,transparent 6deg 16deg);animation:rayons 14s linear infinite;transform-origin:50% 100%}
+.fcPile{position:absolute;left:50%;bottom:6px;width:44px;margin-left:-22px;height:36px}
+.fcPile i{position:absolute;left:0;width:44px;height:12px;border-radius:50%;background:radial-gradient(60% 70% at 40% 35%,#fff3b0,#f5c542 45%,#a8740c);box-shadow:0 2px 0 #7a5200}
+.fcPile i:nth-child(1){bottom:0}.fcPile i:nth-child(2){bottom:7px;left:2px}.fcPile i:nth-child(3){bottom:14px;left:-2px}.fcPile i:nth-child(4){bottom:21px;animation:piece 1.6s ease-in-out infinite}
+.fcTapis{display:block;width:150px;height:14px;margin:0 auto;background:linear-gradient(180deg,#c8102e,#7a0d1c);clip-path:polygon(18% 0,82% 0,100% 100%,0 100%)}
+.fcEntrer{display:inline-block;margin-top:12px;padding:10px 20px;border-radius:999px;font:900 14px Poppins,Arial,sans-serif;letter-spacing:.08em;color:#2a0610;
+  background:linear-gradient(180deg,#fff3b8,#f5c542 50%,#c8961e);box-shadow:0 4px 0 #7a5200,0 8px 20px rgba(245,197,66,.45);animation:pulseBtn 1.6s ease-in-out infinite}
+html body button.facade{display:block!important;flex-direction:column!important;width:100%!important;height:auto!important;min-height:0!important;padding:0 0 14px!important;
+  background:linear-gradient(180deg,#2a0610 0%,#5a0716 35%,#3a0610 100%)!important;color:#fff!important;border:0!important;border-radius:26px 26px 18px 18px!important;
+  box-shadow:0 0 0 2px #f5c542,0 0 0 5px #3a0610,0 0 30px rgba(245,197,66,.3),0 18px 34px rgba(0,0,0,.6)!important;text-align:center!important;font:inherit!important}
+html body button.facade>span{flex:none!important}
+html body button.facade .fcToit{display:flex!important;width:100%}
+html body button.facade .fcEnseigne{display:block!important}
+html body button.facade .fcBat{display:flex!important}
+html body button.facade .fcTapis{display:block!important}
+html body button.facade .fcEntrer{display:inline-block!important}
+/* ---- trésor : piles de pièces, plaques et jetons avec LED ---- */
+html body button.facade .fcTresor{display:block!important;position:relative;height:118px;margin:12px 16px 0;border-radius:16px;
+  background:radial-gradient(70% 90% at 50% 100%,rgba(255,190,90,.35),transparent 70%)}
+.fcLeds{position:absolute;inset:0;pointer-events:none}
+.fcLeds em{position:absolute;left:var(--x);top:var(--y);width:5px;height:5px;margin:-2.5px;border-radius:50%;background:var(--c);
+  box-shadow:0 0 6px 2px var(--c);animation:scintLed 1.4s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes scintLed{0%,100%{opacity:.15;transform:scale(.5)}50%{opacity:1;transform:scale(1.25)}}
+.tPi,.tCh{position:absolute;bottom:6px;width:46px}
+.tPi i,.tCh i{position:absolute;left:0;width:100%;height:13px;border-radius:50%}
+.tPi i{background:radial-gradient(60% 70% at 40% 35%,#fff3b0,#f5c542 45%,#a8740c);box-shadow:0 2.5px 0 #7a5200}
+.tPi.g{left:50%;margin-left:-23px}.tPi.d{left:66%}
+.tPi i:nth-child(1){bottom:0}.tPi i:nth-child(2){bottom:8px;left:1px}.tPi i:nth-child(3){bottom:16px;left:-2px}.tPi i:nth-child(4){bottom:24px;left:2px}.tPi i:nth-child(5){bottom:32px}.tPi i:nth-child(6){bottom:40px;left:-1px}
+.tPi i:nth-child(7){bottom:48px;left:1px;animation:piece 1.6s ease-in-out infinite}
+.tCh i{border:2.5px dashed #fff;box-sizing:border-box;height:14px}
+.tCh.c1{left:18%}.tCh.c1 i{background:#d7263d;box-shadow:0 2.5px 0 #7a0d1c}
+.tCh.c2{left:76%}.tCh.c2 i{background:#16161a;border-color:#f5c542;box-shadow:0 2.5px 0 #000}
+.tCh.c3{left:34%;bottom:2px}.tCh.c3 i{background:#1f6fd6;box-shadow:0 2.5px 0 #0b2f63}
+.tCh i:nth-child(1){bottom:0}.tCh i:nth-child(2){bottom:7px}.tCh i:nth-child(3){bottom:14px}.tCh i:nth-child(4){bottom:21px}.tCh i:nth-child(5){bottom:28px}
+.tPl{position:absolute;bottom:14px;width:64px;height:34px;border-radius:7px;display:grid;place-items:center;font:900 15px Poppins,Arial,sans-serif;color:#fff;
+  text-shadow:0 1px 0 rgba(0,0,0,.5);box-shadow:inset 0 0 0 2px rgba(255,255,255,.55),0 4px 8px rgba(0,0,0,.5)}
+.tPl.p100{left:4%;transform:rotate(-14deg);background:linear-gradient(135deg,#7dff9a,#159a5a)}
+.tPl.p500{left:50%;margin-left:-32px;bottom:62px;transform:rotate(6deg);background:linear-gradient(135deg,#7ab8ff,#1f4fd6);z-index:2}
+.tPl.p250{right:3%;transform:rotate(12deg);background:linear-gradient(135deg,#fff27a,#e0a816);color:#3a2400;text-shadow:none}
+.tCo{position:absolute;width:28px;height:10px;border-radius:50%;background:radial-gradient(60% 70% at 40% 35%,#fff3b0,#f5c542 45%,#a8740c);box-shadow:0 2px 0 #7a5200}
+.tPl.p100{bottom:44px;left:2%;z-index:1}.tPl.p250{bottom:44px;right:2%;z-index:1}
+.tCh,.tPi,.tCo{z-index:3}.tPl.p500{z-index:4}
+.fcLeds em{width:6px;height:6px;margin:-3px}
+html body button.facade .fcTresor{height:150px}
+.fcCv{position:absolute;inset:0;width:100%;height:100%;display:block}
+.fcLeds{z-index:2}
 </style><script>/* QR Code — Copyright (c) 2009 Kazuhiko Arase, licence MIT (via qrcode-terminal) */
 var MCQR=(function(){var M={},C={};function require(n){n=n.replace(/^\.\//,"").replace(/\.js$/,"");if(C[n])return C[n].exports;var m=C[n]={exports:{}};M[n](m,m.exports,require);return m.exports}
 M['QR8bitByte']=function(module,exports,require){
@@ -2203,8 +2359,8 @@ async function ouvrir(pin) {
 }
 function entrer(r) {
   $('cQui').textContent = (emp.patron ? 'Patron · ' : 'Employé · ') + emp.nom;
-  $('oEmp').hidden = !emp.patron; $('bFinTombola').hidden = !emp.patron;
-  if (r) $('tEnJeu').textContent = r.tickets_en_jeu + ' ticket(s) en jeu · ' + r.clients + ' client(s)';
+  $('oEmp').hidden = !emp.patron;
+  if (r) $('tEnJeu').textContent = r.clients + ' client(s) inscrit(s)';
   vue('caisse');
   if (codeEnAttente) { const c = codeEnAttente; codeEnAttente = null; chargerClient(c); }
 }
@@ -2221,7 +2377,6 @@ function montrerClient(f) {
   $('cNom').textContent = f.prenom + (f.nom ? ' ' + f.nom : ''); $('cCode').textContent = 'Code ' + f.code;
   compter($('kSolde'), f.points); $('cFid').textContent = f.fid + ' / 10';
   $('cBons').innerHTML = f.bons.map(b => '<div class="bonC"><span>' + ICON('gift', 'ic mini') + esc(b.libelle) + '</span><button type="button" class="orb" data-bon="' + b.id + '">Utiliser</button></div>').join('');
-  $('cTickets').innerHTML = f.tickets.length ? ICON('ticket', 'ic mini') + f.tickets.length + ' ticket(s) : ' + f.tickets.slice(-6).map(num).join(', ') + (f.tickets.length > 6 ? '…' : '') : '';
   $('blocClient').hidden = false; $('valid').hidden = true; attente = null;
   if (nouveau) { $('blocClient').scrollIntoView({ behavior: 'smooth', block: 'start' }); toast(ICON('check') + esc(f.prenom) + ' · ' + f.points + ' points'); }
 }
@@ -2239,9 +2394,6 @@ document.querySelectorAll('#blocClient [data-d]').forEach(b => b.onclick = () =>
 document.querySelectorAll('#blocClient [data-e]').forEach(b => b.onclick = () => {
   const e = +b.dataset.e; preparer({ fn: 'mc_fidelite', a: { p_euros: e } }, e + ' € joués : ' + (e / 10) + ' case(s) sur sa carte et +' + (e / 5) + ' points ?', 'Carte + ' + (e / 10));
 });
-document.querySelectorAll('#blocClient [data-t]').forEach(b => b.onclick = () => {
-  const t = +b.dataset.t; preparer({ fn: 'mc_tickets', a: { p_n: t } }, 'Donner ' + t + ' ticket(s) de tombola à ' + client.prenom + ' ?', 'Tickets + ' + t);
-});
 $('vAnn').onclick = () => { attente = null; $('valid').hidden = true; };
 $('vOk').onclick = () => occupe($('vOk'), async () => {
   if (!attente) return; const a = attente;
@@ -2250,7 +2402,6 @@ $('vOk').onclick = () => occupe($('vOk'), async () => {
     if (a.fn === 'mc_fidelite') { pleine = r.cartes_pleines; r = r.fiche; }
     montrerClient(r);
     toast(ICON('check') + (pleine ? 'Carte pleine : 20 jetons offerts !' : 'Validé · ' + r.points + ' points'));
-    if (a.fn === 'mc_tickets') majTombola();
   } catch (e) { siCodeFaux(e) || erreur(e); }
 });
 $('cBons').onclick = e => {
@@ -2284,22 +2435,6 @@ $('bScan').onclick = () => occupe($('bScan'), async () => {
 });
 function arreterScan() { clearInterval(boucle); if (flux) flux.getTracks().forEach(t => t.stop()); flux = null; $('scan').hidden = true; }
 $('bScanFin').onclick = arreterScan;
-
-/* ---------- Tombola ---------- */
-async function majTombola() { try { const r = await rpc('mc_caisse_ouvrir', { p_pin: emp.pin }); $('tEnJeu').textContent = r.tickets_en_jeu + ' ticket(s) en jeu · ' + r.clients + ' client(s)'; } catch (e) {} }
-$('tirer').onclick = () => occupe($('tirer'), async () => {
-  const g = $('gagnant'); $('gagnantNom').textContent = ''; let k = 0;
-  const it = setInterval(() => { g.textContent = num(Math.floor(Math.random() * 999) + 1); k++; }, 70);
-  try {
-    const [r] = await Promise.all([rpc('mc_tirage', { p_pin: emp.pin }), new Promise(o => setTimeout(o, 1600))]);
-    clearInterval(it); g.textContent = num(r.numero); $('gagnantNom').textContent = r.prenom + (r.nom ? ' ' + r.nom : '') + ' · carte ' + r.code;
-  } catch (e) { clearInterval(it); g.textContent = '—'; siCodeFaux(e) || erreur(e); }
-});
-$('bFinTombola').onclick = () => occupe($('bFinTombola'), async () => {
-  if (!await demander('Terminer la tombola ?', 'Tous les tickets actuels sortent du jeu. Les clients repartent de zéro pour la prochaine tombola.', 'Terminer')) return;
-  try { const r = await rpc('mc_nouvelle_tombola', { p_pin: emp.pin }); toast(ICON('check') + r.tickets_retires + ' ticket(s) retirés'); $('gagnant').textContent = '—'; $('gagnantNom').textContent = ''; majTombola(); if (client) chargerClient(client.code); }
-  catch (e) { siCodeFaux(e) || erreur(e); }
-});
 
 /* ---------- Listing clients ---------- */
 let rech = null;
