@@ -413,7 +413,7 @@ body{padding-left:max(30px,env(safe-area-inset-left,0px))!important;padding-righ
         <div class="majEcran" id="majE"></div>
       </div>
     </div>
-    <div class="bandeau"><span>Fini les tickets papier : tes points sont sur ton téléphone · Carte fidélité : 10 cases = 20 jetons offerts · Pas de perdant au Monte-Carlo ! · Top 5 = une surprise à la fin de la foire ! · Fini les tickets papier : tes points sont sur ton téléphone · Carte fidélité : 10 cases = 20 jetons offerts · Pas de perdant au Monte-Carlo !</span></div>
+    <div class="bandeau"><span>Fini les tickets papier : tes points sont sur ton téléphone · Carte fidélité : 10 tampons = 10 € de jetons offerts · Pas de perdant au Monte-Carlo ! · Top 5 = une surprise à la fin de la foire ! · Fini les tickets papier : tes points sont sur ton téléphone · Carte fidélité : 10 tampons = 10 € de jetons offerts · Pas de perdant au Monte-Carlo !</span></div>
   </section>
 </div>
 <style id="fondCanva">
@@ -1076,6 +1076,33 @@ html body .rCase .rcSup{position:absolute;top:-9px;right:-7px;width:26px;height:
 .rCase select,#sInfos{font:inherit;font-size:16px;color:#fff;background:rgba(0,0,0,.42);border:1px solid rgba(245,197,66,.45);border-radius:12px;padding:11px 10px;-webkit-appearance:none;appearance:none}
 #sInfos{width:100%;box-sizing:border-box;line-height:1.45}
 .prochFoire small{display:block}
+/* ===== Titre de la carte fidélité ===== */
+.fidTete{position:relative;text-align:center;margin:2px 0 14px}
+.fidPlaque{position:relative;padding:10px 12px 11px;border-radius:14px;
+  background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(40,0,10,.55));
+  box-shadow:0 0 0 2px #c8901a,0 0 0 4px rgba(0,0,0,.4),0 0 0 5px rgba(255,229,138,.6),0 0 22px rgba(245,197,66,.35),inset 0 0 18px rgba(0,0,0,.6)}
+.fidPlaque::before{content:"";position:absolute;inset:4px;border-radius:11px;pointer-events:none;
+  background:radial-gradient(circle,#fff2b0 0 1.4px,transparent 2px) 0 0/12px 12px;
+  -webkit-mask:linear-gradient(#000 0 0) top/100% 4px no-repeat,linear-gradient(#000 0 0) bottom/100% 4px no-repeat;mask:linear-gradient(#000 0 0) top/100% 4px no-repeat,linear-gradient(#000 0 0) bottom/100% 4px no-repeat;
+  animation:fidLed 1.2s steps(1) infinite;filter:drop-shadow(0 0 3px #ffd966)}
+@keyframes fidLed{50%{opacity:.4}}
+.fidSur{display:block;white-space:nowrap;font-size:min(10px,2.8vw);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,240,215,.75);margin-top:3px}
+html body .fidTitre{margin:0;white-space:nowrap;
+  font:900 min(26px,6.1vw)/1.15 Georgia,'Times New Roman',serif;letter-spacing:.04em;text-transform:uppercase;
+  background:linear-gradient(180deg,#fffbe0 0%,#ffe58a 30%,#f5c542 52%,#b8800f 78%,#ffe58a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 0 #4a2c00) drop-shadow(0 0 10px rgba(245,197,66,.45))}
+.fidLigne{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:3px}
+.fidLigne i{font-style:normal;font-size:14px;color:#f5c542;text-shadow:0 0 8px rgba(245,197,66,.8)}
+html body .fidN{position:relative;display:inline-block;margin-top:-9px;top:9px;font-weight:800;font-size:13px;color:#2a0610;background:var(--or-g);border-radius:999px;padding:3px 12px;box-shadow:0 0 0 2px #4a2c00,0 4px 10px rgba(0,0,0,.4);white-space:nowrap}
+/* ===== LED autour des jetons de la carte fidélité ===== */
+.casesL{position:relative;margin:12px 0 12px;padding:16px 14px;border-radius:16px;background:rgba(0,0,0,.35);
+  box-shadow:inset 0 0 0 1px rgba(245,197,66,.55),inset 0 0 18px rgba(0,0,0,.6),0 0 16px rgba(245,197,66,.15)}
+html body .casesL .cases{margin:0}
+.ledsC{position:absolute;inset:0;pointer-events:none}
+.ledsC em{position:absolute;width:6px;height:6px;border-radius:50%;transform:translate(-50%,-50%);background:currentColor;color:#ff3d5a;
+  box-shadow:0 0 4px 1px currentColor,0 0 9px 2px currentColor;animation:ledCoul 7s linear infinite,ledFlash 1s steps(1) infinite;animation-delay:var(--d),0s}
+.ledsC em:nth-child(even){animation-delay:var(--d),-.5s}
+@media (prefers-reduced-motion:reduce){.ledsC em{animation:ledCoul 7s linear infinite}}
 </style><script>/* QR Code — Copyright (c) 2009 Kazuhiko Arase, licence MIT (via qrcode-terminal) */
 var MCQR=(function(){var M={},C={};function require(n){n=n.replace(/^\.\//,"").replace(/\.js$/,"");if(C[n])return C[n].exports;var m=C[n]={exports:{}};M[n](m,m.exports,require);return m.exports}
 M['QR8bitByte']=function(module,exports,require){
