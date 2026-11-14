@@ -1103,6 +1103,13 @@ html body .casesL .cases{margin:0}
   box-shadow:0 0 4px 1px currentColor,0 0 9px 2px currentColor;animation:ledCoul 7s linear infinite,ledFlash 1s steps(1) infinite;animation-delay:var(--d),0s}
 .ledsC em:nth-child(even){animation-delay:var(--d),-.5s}
 @media (prefers-reduced-motion:reduce){.ledsC em{animation:ledCoul 7s linear infinite}}
+/* aide notifications */
+html body .notifAide.etapesNotif{display:block;padding:12px 14px;border-radius:14px;background:rgba(245,197,66,.1);border:1px solid rgba(245,197,66,.35);color:#fff4e0;text-align:left}
+.etapesNotif .enT{display:flex;align-items:center;gap:8px;font-weight:800;color:#f7cf4f;font-size:14.5px}
+.etapesNotif ol{margin:8px 0 0;padding-left:22px;font-size:14px;line-height:1.45}
+.etapesNotif li{margin:5px 0}
+.etapesNotif li::marker{color:#f5c542;font-weight:800}
+.partIc{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:6px;background:rgba(255,255,255,.12);font-size:12px;vertical-align:1px}
 </style><script>/* QR Code — Copyright (c) 2009 Kazuhiko Arase, licence MIT (via qrcode-terminal) */
 var MCQR=(function(){var M={},C={};function require(n){n=n.replace(/^\.\//,"").replace(/\.js$/,"");if(C[n])return C[n].exports;var m=C[n]={exports:{}};M[n](m,m.exports,require);return m.exports}
 M['QR8bitByte']=function(module,exports,require){
@@ -2490,10 +2497,10 @@ function notifPousser() { if (window.MC_TEST_URL) return; try { fetch(NOTIF_FN, 
 function notifInterface(btn, aide, fn, args) {
   const etat = () => {
     btn.hidden = true; aide.hidden = true;
-    if (surIphone && !enAppli()) { aide.hidden = false; aide.innerHTML = ICON('bell', 'ic mini') + 'Pour recevoir une notification à chaque message : touche <b>Partager</b> puis <b>Sur l\'écran d\'accueil</b>, et ouvre l\'appli depuis la nouvelle icône.'; return; }
+    if (surIphone && !enAppli()) { aide.hidden = false; aide.classList.add('etapesNotif'); aide.innerHTML = '<span class="enT">' + ICON('bell', 'ic mini') + 'Reçois une notification à chaque message</span><ol><li>Touche le bouton <b>Partager</b> <span class="partIc">⬆</span> (en bas dans Safari, en haut dans Chrome)</li><li>Choisis <b>« Sur l\'écran d\'accueil »</b></li><li>Ouvre l\'appli <b>Monte-Carlo</b> depuis la nouvelle icône, puis reviens ici</li></ol>'; return; }
     if (!notifPossible()) return;
-    if (Notification.permission === 'granted') { aide.hidden = false; aide.innerHTML = ICON('check', 'ic mini') + 'Notifications activées.'; notifAbonner(fn, args(), false).catch(() => {}); return; }
-    if (Notification.permission === 'denied') { aide.hidden = false; aide.textContent = 'Notifications bloquées : autorise-les dans Réglages › Notifications.'; return; }
+    if (Notification.permission === 'granted') { aide.hidden = false; aide.classList.remove('etapesNotif'); aide.innerHTML = ICON('check', 'ic mini') + '<span>Notifications activées.</span>'; notifAbonner(fn, args(), false).catch(() => {}); return; }
+    if (Notification.permission === 'denied') { aide.hidden = false; aide.classList.remove('etapesNotif'); aide.innerHTML = '<span>Notifications bloquées : autorise-les dans Réglages › Notifications.</span>'; return; }
     btn.hidden = false;
   };
   btn.onclick = () => occupe(btn, async () => { await notifAbonner(fn, args(), true); toast(ICON('bell') + 'Notifications activées !'); etat(); });
