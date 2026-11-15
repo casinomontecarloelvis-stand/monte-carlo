@@ -4709,29 +4709,42 @@ const Guide = (() => {
   const nomDe0 = el => { if (el.classList.contains('classB')) return 'Classement'; if (el.classList.contains('tomboB')) return 'Tombola'; if (el.id === 'kRoueB') return 'Roue'; if (el.classList.contains('facade')) return 'Pièces'; if (el.id === 'kReglesB') return 'Règles'; if (el.id === 'kActusB') return 'Actualités'; if (el.id === 'sauve') return 'Appli'; const h = el.querySelector('h4,.msgTit b,.rgTit b,.fcTxt,img[alt]'); if (!h) return ''; return (h.tagName === 'IMG' ? h.alt : h.textContent).replace(/\s+/g, ' ').trim().split(/[·:]/)[0].replace(/^(Messages du|Le stand|Mes|Mon|Les|Suivez-nous sur nos)\s+/i, '').trim().slice(0, 16); };
   const salle = document.querySelector('.facade .jxSalle'), fac = document.querySelector('.pageMenu .facade');
   if (salle && fac) { salle.classList.add('bloc', 'salleSeule'); fac.after(salle); }
+  const COUPE = ['histo', 'kInfosB', 'sauve'];
+  const estPetit = el => PETITS.some(c => el.classList.contains(c)) || el.id === 'kMaj' || el.classList.contains('defile');
+  const visible = el => !el.hidden && getComputedStyle(el).display !== 'none';
   document.querySelectorAll('.pageMenu').forEach(pg => {
-    const PAR = { champions: 1, jeux: 1, accueil: 9 }[pg.dataset.page] || 2;
-    const duos = []; let cur = null, n = 0;
-    const COUPE = ['histo', 'kInfosB', 'sauve'];
-    [...pg.children].forEach(el => {
-      const petit = PETITS.some(c => el.classList.contains(c)) || el.id === 'kMaj' || el.classList.contains('defile');
-      const coupe = pg.dataset.page === 'moi' && !petit && COUPE.some(k => el.id === k || el.classList.contains(k));
-      if (!cur || coupe || (!petit && n === PAR && pg.dataset.page !== 'moi')) { cur = document.createElement('div'); cur.className = 'duo'; pg.insertBefore(cur, el); duos.push(cur); n = 0; }
-      cur.appendChild(el); if (!petit) n++;
-    });
-    if (duos.length < 2) return;
-    const barre = document.createElement('div'); barre.className = 'sousOnglets'; pg.insertBefore(barre, pg.firstChild);
+    const PAR = { champions: 1, jeux: 1, accueil: 99 }[pg.dataset.page] || 2;
+    const elems = [...pg.children];                      // ordre d'origine
+    const reserve = document.createElement('div'); reserve.hidden = true; reserve.className = 'reserve';
+    const barre = document.createElement('div'); barre.className = 'sousOnglets';
+    pg.prepend(barre); pg.appendChild(reserve);
+    let duos = [], actuel = 0, enCours = false;
     function montre(i) {
-      duos.forEach((d, k) => d.hidden = k !== i);
-      [...barre.children].forEach((b, k) => b.classList.toggle('on', k === i)); window.scrollTo(0, 0); window.dispatchEvent(new Event('resize'));
+      actuel = Math.max(0, Math.min(i, duos.length - 1));
+      duos.forEach((d, k) => d.hidden = k !== actuel);
+      [...barre.children].forEach((b, k) => b.classList.toggle('on', k === actuel));
     }
-    function noms() {
-      barre.innerHTML = duos.map((d, i) => { const t = [...d.children].filter(c => !c.hidden).map(nomDe).filter(Boolean).slice(0, 1).join('') || ('Page ' + (i + 1)); return '<button type="button">' + t + '</button>'; }).join('');
-      [...barre.children].forEach((b, i) => b.onclick = () => montre(i));
+    function construire() {
+      enCours = true;
+      elems.forEach(el => reserve.appendChild(el)); duos.forEach(d => d.remove()); duos = [];
+      let cur = null, n = 0;
+      elems.forEach(el => {
+        if (!visible(el)) return;                         // les fenêtres vides restent de côté
+        const petit = estPetit(el);
+        const coupe = pg.dataset.page === 'moi' && !petit && COUPE.some(k => el.id === k || el.classList.contains(k));
+        if (!cur || (!petit && cur.dataset.n > 0 && (coupe || (n === PAR && pg.dataset.page !== 'moi')))) { cur = document.createElement('div'); cur.className = 'duo'; reserve.before(cur); duos.push(cur); n = 0; cur.dataset.n = 0; }
+        cur.appendChild(el); if (!petit) { n++; cur.dataset.n = n; }
+      });
+      barre.hidden = duos.length < 2;
+      barre.innerHTML = duos.map(d => { const t = [...d.children].filter(c => !estPetit(c)).map(nomDe).filter(Boolean)[0] || 'Plus'; return '<button type="button">' + t + '</button>'; }).join('');
+      [...barre.children].forEach((b, i) => b.onclick = () => { montre(i); window.scrollTo(0, 0); window.dispatchEvent(new Event('resize')); });
+      montre(actuel);
+      setTimeout(() => { enCours = false; }, 0);
     }
-    duos.forEach(d => d.hidden = false); noms(); montre(0);
-    pg._noms = () => { const k = [...barre.children].findIndex(b => b.classList.contains('on')); duos.forEach(d => d.hidden = false); noms(); montre(Math.max(0, k)); };
+    construire();
+    let t = null;
+    new MutationObserver(() => { if (enCours) return; clearTimeout(t); t = setTimeout(construire, 250); })
+      .observe(pg, { attributes: true, attributeFilter: ['hidden'], subtree: true });
   });
-  setTimeout(() => document.querySelectorAll('.pageMenu').forEach(pg => pg._noms && pg._noms()), 2500);
 })();
 </script></body></html>
