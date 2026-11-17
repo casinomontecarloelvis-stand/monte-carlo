@@ -2278,6 +2278,14 @@ html body .jetGrille{grid-template-columns:repeat(4,1fr)!important}
 .hL em{flex:none;font-style:normal;font-weight:800;font-variant-numeric:tabular-nums}
 .hL em.plus{color:#7ee2a3}.hL em.moins{color:#ff8fa3}
 html body .grille5{grid-template-columns:repeat(5,1fr)!important}html body .grille5 button:not(#zz){font-size:15px!important;padding:0 2px!important;white-space:nowrap}
+/* ===== Machine à pièces : gratuit d'abord, payant pour gagner ===== */
+html body .achatNote{margin:6px 0 0;font-size:12.5px;line-height:1.35;color:rgba(255,240,215,.75);text-align:center}
+html body .achatOu{display:flex;align-items:center;gap:10px;margin:14px 0 8px;font:700 11px system-ui;letter-spacing:.16em;text-transform:uppercase;color:#d9a93a}
+html body .achatOu::before,html body .achatOu::after{content:"";flex:1;height:1px;background:rgba(217,169,58,.5)}
+html body .achatOffre.petit b{font-size:44px!important}
+html body .achatGagne:not(#zz){display:block;width:100%;margin-top:8px;padding:13px 10px;font:800 15px/1.2 inherit;color:#fff;background:linear-gradient(180deg,#2bb866,#17803f);border:0;border-radius:12px;box-shadow:0 3px 0 #0e5a2b}
+html body .achatGagne:disabled{opacity:.5}
+#jeu.modeFun .jeuStat:last-child b{color:#bfe8ff;font-size:16px}
 .jt-accueil .jeton{background:url(img/9982dae3cc97.webp) center/100% 100% no-repeat!important}.jt-jeux .jeton{background:url(img/af7ba41279ea.webp) center/100% 100% no-repeat!important}.jt-champions .jeton{background:url(img/7e0dfc440034.webp) center/100% 100% no-repeat!important}.jt-infos .jeton{background:url(img/e27baf133d4a.webp) center/100% 100% no-repeat!important}.jt-moi .jeton{background:url(img/bd804373b299.webp) center/100% 100% no-repeat!important}</style><script>/* QR Code — Copyright (c) 2009 Kazuhiko Arase, licence MIT (via qrcode-terminal) */
 var MCQR=(function(){var M={},C={};function require(n){n=n.replace(/^\.\//,"").replace(/\.js$/,"");if(C[n])return C[n].exports;var m=C[n]={exports:{}};M[n](m,m.exports,require);return m.exports}
 M['QR8bitByte']=function(module,exports,require){
@@ -4467,7 +4475,8 @@ document.querySelectorAll('.fD').forEach(b => b.insertAdjacentHTML('afterbegin',
     raf = requestAnimationFrame(boucle);
   }
   function hud() { $('jJet').textContent = pieces; $('jSco').textContent = ptsCarte; $('jRec').textContent = resteJour;
-    $('jaTxt').innerHTML = 'Tu as <b>' + ptsCarte + ' points</b> sur ta carte.'; $('jaBtn').textContent = ptsCarte < prix ? 'Pas assez de points' : 'JOUER · ' + prix + ' points'; $('jaNb').textContent = paquet; $('jaPx').textContent = prix; $('jaBtn').disabled = ptsCarte < prix; }
+    $('jaTxt').innerHTML = 'Tu as <b>' + ptsCarte + ' points</b> sur ta carte.'; $('jaBtn').textContent = ptsCarte < prix ? 'Pas assez de points' : 'JOUER POUR GAGNER · ' + prix + ' points';
+    el.classList.toggle('modeFun', amuse); $('jRecL').textContent = amuse ? 'Mode' : 'Gain possible'; if (amuse) $('jRec').textContent = 'Gratuit'; $('jaNb').textContent = paquet; $('jaPx').textContent = prix; $('jaBtn').disabled = ptsCarte < prix; }
   function taille() {
     const r = $('jeuZone').getBoundingClientRect();
     sc = Math.min(r.width / SW, r.height / SH); dpr = Math.min(3, window.devicePixelRatio || 1);
@@ -4477,14 +4486,16 @@ document.querySelectorAll('.fD').forEach(b => b.insertAdjacentHTML('afterbegin',
   /* ---------- Fenêtre du jeu ---------- */
   const el = document.createElement('div'); el.id = 'jeu'; el.hidden = true;
   el.innerHTML = '<div class="jeuHaut"><button type="button" class="btnIcone" id="jFermer" aria-label="Fermer">✕</button>' +
-    '<div class="jeuStat led"><span>Pièces</span><b id="jJet">0</b></div><div class="jeuStat led"><span>Ma carte</span><b id="jSco">0</b></div><div class="jeuStat led"><span>Gain possible</span><b id="jRec">0</b></div></div>' +
+    '<div class="jeuStat led"><span>Pièces</span><b id="jJet">0</b></div><div class="jeuStat led"><span>Ma carte</span><b id="jSco">0</b></div><div class="jeuStat led"><span id="jRecL">Gain possible</span><b id="jRec">0</b></div></div>' +
     '<div class="jeuZone" id="jeuZone"><canvas id="jeuCv"></canvas></div>' +
-    '<p class="jeuAide">Le lanceur doré glisse en haut : appuie sur le panneau, la pièce descend entre les clous, passe dans une piste et tombe sur la grille. Allume les 5 voyants pour déclencher une pluie de pièces ! Les plaques qui tombent rapportent de <b>vrais points</b> sur ta carte (limite par jour).</p>' +
+    '<p class="jeuAide">Le lanceur doré glisse en haut : appuie sur le panneau, la pièce descend entre les clous, passe dans une piste et tombe sur la grille. Allume les 5 voyants pour déclencher une pluie de pièces ! Joue <b>gratuit</b> pour t\'amuser, ou paie avec tes points pour que les plaques rapportent de <b>vrais points</b> sur ta carte (limite par jour).</p>' +
     '<div class="jeuFin" id="jeuAchat" hidden><div class="achatBox led"><div class="achatAmp"></div><div class="achatRay"></div>' +
     '<div class="achatHaut">★ CASINO MONTE-CARLO ★</div><div class="achatTitre">MACHINE À PIÈCES</div>' +
     '<div class="achatPile"><i></i><i></i><i></i><i></i><i></i></div>' +
-    '<div class="achatOffre"><b id="jaNb">10</b><span>PIÈCES</span></div><div class="achatPrix">pour <b id="jaPx">100</b> points de ta carte</div>' +
-    '<p id="jaTxt"></p><button type="button" class="orb achatBtn" id="jaBtn">Acheter</button><p class="erreurForm" id="jaErr"></p><button type="button" class="achatFun" id="jaFun">Jouer pour s\'amuser (sans points)</button><button type="button" class="achatNon" id="jaNon">Plus tard</button></div></div>';
+    '<button type="button" class="orb achatBtn" id="jaFun">JOUER GRATUIT</button><p class="achatNote">20 pièces offertes pour s\'amuser, sans rien gagner</p>' +
+    '<div class="achatOu"><span>ou pour gagner des points</span></div>' +
+    '<div class="achatOffre petit"><b id="jaNb">10</b><span>PIÈCES</span></div><div class="achatPrix">pour <b id="jaPx">100</b> points de ta carte</div>' +
+    '<p id="jaTxt"></p><button type="button" class="achatGagne" id="jaBtn">Acheter</button><p class="achatNote">Les plaques qui tombent rapportent de vrais points sur ta carte</p><p class="erreurForm" id="jaErr"></p><button type="button" class="achatNon" id="jaNon">Plus tard</button></div></div>';
   document.body.appendChild(el);
   cv = $('jeuCv'); cx = cv.getContext('2d');
   cv.addEventListener('pointerdown', e => { e.preventDefault(); lancer(e); });
